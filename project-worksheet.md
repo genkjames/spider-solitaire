@@ -31,6 +31,8 @@ Include a full list of features that have been prioritized based on the `Time an
 
 ### Landing Page
 What will a player see when they start your game?
+- Welcome page that asks for a name and a symbol(diamonds, hearts, etc.) of the cards they prefer
+- Rules of the game
 
 ### Game Initialization
 What will a player see when the game is started? 
