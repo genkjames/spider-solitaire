@@ -17,7 +17,11 @@ This schedule will be used to keep track of your progress throughout the week an
 
 ## Project Description
 
-Use this section to describe your final project and perhaps any links to relevant sites that help convey the concept and\or functionality.
+<!-- Use this section to describe your final project and perhaps any links to relevant sites that help convey the concept and/or functionality. -->
+
+The purpose of this game is to make 4 sets of thirteen cards each, with the cards in a sequence from King to Ace. There is only one suit being used for this game, and users are allowed to pick a suit they want the cards to feature. The users score is based on how long they took to create all sets.
+- Site Example 1: http://www.free-spider-solitaire.com/
+- Site Example 2: https://www.solitr.com/spider-solitaire-two-suits
 
 ## Wireframes
 
@@ -25,44 +29,70 @@ Include images of your wireframes.
 
 ## Priority Matrix
 
-Include a full list of features that have been prioritized based on the `Time and Importance` Matix.  
+Include a full list of features that have been prioritized based on the `Time and Importance` Matix. 
+
+| Component | Priority | Estimated Time |
+| --- | :---: |  :---: |
+| Game Logic | 1 | 7hrs| 
+| Card Animation | 2 | 4hrs| 
+| Suits Creation | 3 | 3hrs| 
+| Page Layout | 4 | 6hrs| 
+| Total |  | 20hrs| 
 
 ## Game Components
 
 ### Landing Page
-What will a player see when they start your game?
-- Welcome page that asks for a name and a symbol(diamonds, hearts, etc.) of the cards they prefer
-- Rules of the game
+<!-- What will a player see when they start your game? -->
+A player will see a welcome page that asks for a name and a suit (diamonds, hearts, etc.) of the cards they prefer when they start a game. The rules of the game will also be displayed.
 
 ### Game Initialization
-What will a player see when the game is started? 
+<!-- What will a player see when the game is started?  -->
+When the game is started cards will be shuffled and distributed from the deck position to the playing positions on the board. There will be a reset button and undo button at the bottom of the page.
 
 ### Playing The Game
-What will be the flow of the game, what will the user be expeted to do and what will the user expect from the gam
+<!-- What will be the flow of the game, what will the user be expected to do and what will the user expect from the game. -->
+Users will be able to drag a card from the playing field on top of another card on the playing field, as long as the card being dragged is one rank lower than the card it's being placed on. The goal is to try to get a sequence of 13 cards that are placed from King to Ace in the shortest amount of time possible. Once a sequence of 13 cards in the right order is met, that sequence is moved to one of the empty slots at the top right corner of the page. All four slots should be filled to win the game. Clicking on the deck of cards in the top left corner of the screen gives users more cards if needed. All spots on the field cannot be empty when the deck of cards is clicked. When you click the Undo button, the last move from the user will be cleared. The user will be able to click the Undo button as many times as possible, even to the start of the game, however their score will go down. The score of the user will be based on the time it took them to complete the game.
 
 ### Winning The Game
-What does it look like when the game ends, what determines winning or losing?
+<!-- What does it look like when the game ends, what determines winning or losing? -->
+Once the playing field is cleared of all cards and the deck is empty, the user wins the game. If there are no more possible combinations on the playing field and the deck is empty, then the user loses the game. Game status will be displayed in a pop up box. If user has won, confetti will fall from the top of the screen.
 
 ### Game Reset
-How will the user restart the game once it has been completed.
+<!-- How will the user restart the game once it has been completed. -->
+The user will be able to restart the game at any time. A reset button will be located at the bottom of the board.
 
 ## MVP 
 
-Include the full list of features that will be part of your MVP 
+<!-- Include the full list of features that will be part of your MVP  -->
+- 1 player game
+- User will be greeted by name.
+- Cards will be animated to move across the screen.
+- Cards can be dragged to another card, if the rank of the card being dragged is one rank lower than the card it's being placed on.
+- Score will be determined by time.
+- Creating the design of each card based on the suit user has chosen.
 
 ## POST MVP
 
-Include the full list of features that you are considering for POST MVP
+<!-- Include the full list of features that you are considering for POST MVP -->
 ## Functional Components
+- Have the computer give the user a hint as to what they could play for their next move
+- Two suit game
+- Four suit game
 
 Based on the initial logic defined in the previous game phases section try and breakdown the logic further into functional components, and by that we mean functions.  Does your logic indicate that code could be encapsulated for the purpose of reusablility.  Once a function has been defined it can then be incorporated into a class as a method. 
 
 Time frames are also key in the development cycle.  You have limited time to code all phases of the game.  Your estimates can then be used to evalute game possibilities based on time needed and the actual time you have before game must be submitted. 
 
-| Component | Priority | Estimated Time | Time Invetsted | Actual Time |
+| Component | Priority | Estimated Time | Time Invested | Actual Time |
 | --- | :---: |  :---: | :---: | :---: |
-| Component 1 | H | 10hrs| 12hrs | 12hrs |
-| Total |  | 10hrs| 12hrs | 12hrs |
+| Game Logic | 1 | 7hrs| 12hrs | 12hrs |
+| Card Animation | 2 | 4hrs| 12hrs | 12hrs |
+| Suits Creation | 3 | 3hrs| 12hrs | 12hrs |
+| Page Layout | 4 | 6hrs| 12hrs | 12hrs |
+| Game Score | 5 | 1hrs| 12hrs | 12hrs |
+| Post-MVP | 6 | 10hrs| 12hrs | 12hrs |
+| Total |  | 31hrs| 12hrs | 12hrs |
+
 
 ## Helper Functions
 Helper functions should be generic enought that they can be reused in other applications. Use this section to document all helper functions that fall into this category.
