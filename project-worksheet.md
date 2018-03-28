@@ -25,7 +25,8 @@ The purpose of this game is to make 4 sets of thirteen cards each, with the card
 
 ## Wireframes
 
-Include images of your wireframes. 
+<!-- Include images of your wireframes.  -->
+![wireframe](wireframe.jpg);
 
 ## Priority Matrix
 
@@ -38,6 +39,8 @@ Include a full list of features that have been prioritized based on the `Time an
 | Suits Creation | 3 | 3hrs| 
 | Page Layout | 4 | 6hrs| 
 | Total |  | 20hrs| 
+
+![priority](priority.jpg);
 
 ## Game Components
 
@@ -69,15 +72,16 @@ The user will be able to restart the game at any time. A reset button will be lo
 - Cards will be animated to move across the screen.
 - Cards can be dragged to another card, if the rank of the card being dragged is one rank lower than the card it's being placed on.
 - Score will be determined by time.
-- Creating the design of each card based on the suit user has chosen.
+- Creating the design of each card based on the suit the user has chosen.
 
 ## POST MVP
 
 <!-- Include the full list of features that you are considering for POST MVP -->
-## Functional Components
 - Have the computer give the user a hint as to what they could play for their next move
 - Two suit game
 - Four suit game
+
+## Functional Components
 
 Based on the initial logic defined in the previous game phases section try and breakdown the logic further into functional components, and by that we mean functions.  Does your logic indicate that code could be encapsulated for the purpose of reusablility.  Once a function has been defined it can then be incorporated into a class as a method. 
 
