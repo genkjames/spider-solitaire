@@ -7,8 +7,7 @@
 body {
   font-size: 16px;
   font-family: "Times New Roman", "Times", "Georgia", serif;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
 }
 
 fieldset label {
@@ -52,22 +51,15 @@ section h1 {
 
 section {
   width: 100%;
+  max-width: 1500px;
   height: 100%;
+  min-height: 736px;
   background: linear-gradient(green, darkgreen);
   position: absolute;
   top: 0;
   left: 0;
   display: flex;
 }
-
-/*section:nth-of-type(1) {
-  width: 100%;
-  background: transparent;
-}
-
-section:nth-of-type(2) {
-  width: 100%;
-}*/
 
 @keyframes slide {
   0% {
@@ -87,7 +79,7 @@ section:nth-of-type(2) {
   z-index: 1;
 }
 
-.title {
+.title, .cards {
   width: 70%;
   position: relative;
 }
@@ -96,14 +88,6 @@ section:nth-of-type(2) {
   padding: 50px 20px;
   width: 30%;
   background: linear-gradient(#FFF, #F3F3F3);
-}
-
-.form-container {
-  height: 65%;
-}
-
-.rules {
-  height: 35%;
 }
 
 button {
@@ -116,28 +100,86 @@ button {
   letter-spacing: 1px;
 }
 
-.deck, .finished-deck-slots, .playing-field {
-  position: absolute;
+.cards {
+  padding: 15px 35px;
+}
+
+.cards > p {
+  font-size: 24px;
+  color: white;
+}
+
+.game-buttons {
+  width: 232px;
+  margin: 0 auto;
+}
+
+.game-buttons button {
+  display: inline-block;
+}
+
+.top-row {
+  width: 100%;
+  display: flex;
+}
+
+.deck {
+  flex: 1;
+}
+
+.deck .slot {
+  position: relative;
 }
 
 .finished-deck-slots {
+  flex: 3;
   display: flex;
   justify-content: flex-end;
-  right: 30px;
 }
 
 .playing-field {
   display: flex;
   justify-content: flex-end;
-  top: 45%;
-  right: 30px;
 }
 
 .slot {
+  position: relative;
   width: 100px;
   height: 160px;
-  margin: 30px 0px 30px 30px;
-  border: 1px solid white;
+  margin: 20px 0px 20px 30px;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.5);
+}
+
+.deck .slot {
+  margin: 20px 0px 20px 0px;
+}
+
+.finished-deck-slots .slot {
+  border: 1px solid white;
+}
+
+.card {
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  border: 1px solid white;
+  background: blue;
+  top: 0;
+  left: 0;
+}
+
+.playing-field .slot .card .cover {
+  width: 100%;
+  height: 100%;
+  background: orange;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+}
+
+.playing-field .slot .card:last-child .cover{
+  background: transparent;
 }
