@@ -27,14 +27,28 @@ $(document).ready(function() {
 
   function viewDeck(deck) {
     for(let i = 0; i < deck.length; i++) {
-      let card = $(`<div class="card" value=${deck[i].value}></div`);
+      let card = $(`<div class="card cover ${deck[i].suit}" value=${deck[i].value}></div`);
       let p = $(`<p></p>`).text(`${deck[i].rank}`);
       card.append(p);
       card.append(p.clone());
-      let cover = $('<div class="cover"></div>');
-      card.append(cover);
+      card.contents().css('visibility', 'hidden');
       $('.deck .slot').append(card);
     }
+  }
+
+  let selected = [];
+
+  function showClicks() {
+    $('.show').on('click', function(e) {
+      if(selected.length < 2) {
+        selected.push($(e.target));
+        $(e.target).addClass('selected');
+        console.log(2);
+      }
+      else {
+        console.log(selected.indexOf($(e.target)));
+      }
+    });
   }
 
   function distributeInitialCards() {
@@ -44,18 +58,26 @@ $(document).ready(function() {
     distribute(numOfCards);
   }
 
+  let p = 0;
+
   function distribute(numOfCards) {
     const cards = $('.deck .slot .card');
     const playingFields = $('.playing-field .slot');
     let field = 0;
+    let show = numOfCards - playingFields.length + 1;
     let n = 1;
-    let p = 0;
 
     const addCards = setInterval(function() {
       if(n < numOfCards+1) {
+        if(show === n) {
+          let frontCard = cards.eq(cards.length-n);
+        frontCard.addClass('show');
+        frontCard.removeClass('cover');
+        frontCard.contents().css('visibility', 'visible');
+        show++;
+        }
+
         playingFields[field].append(cards[cards.length-n]);
-        cards.eq(cards.length-n).css('top', p*15+"px");
-        cards.eq(cards.length-n).css('left', "0px");
         field++;
 
         if(field === playingFields.length) {
@@ -67,8 +89,9 @@ $(document).ready(function() {
       }
       else {
         clearInterval(addCards);
+        showClicks();
       }
-    }, 80);
+    }, 60);
   }
 
   $("#submit").on("click", function(e){
@@ -81,5 +104,11 @@ $(document).ready(function() {
     $('#player-name').text(name);
     viewDeck(shuffle(makeDeck(suit, 5)));
     distributeInitialCards();
+  });
+
+  $('.deck').on('click', function() {
+    if($('.deck .slot .card').length > 0) {
+      distribute($('.playing-field .slot').length);
+    }
   });
 });

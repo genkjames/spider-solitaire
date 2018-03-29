@@ -26,7 +26,7 @@ The purpose of this game is to make 4 sets of thirteen cards each, with the card
 ## Wireframes
 
 <!-- Include images of your wireframes.  -->
-![wireframe](wireframe.jpg);
+![wireframe](images/wireframe.jpg);
 
 ## Priority Matrix
 
@@ -40,7 +40,7 @@ Include a full list of features that have been prioritized based on the `Time an
 | Page Layout | 4 | 6hrs| 
 | Total |  | 20hrs| 
 
-![priority](priority.jpg);
+![priority](images/priority.jpg);
 
 ## Game Components
 
