@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  let upDeck = 0;
+
   function makeDeck(suitName, numOfSets) {
     const ranks = ["K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2", "A"];
     const deck = [];
@@ -60,28 +62,23 @@ $(document).ready(function() {
 
   function compareCards() {
     if(selected.length === 2) {
-      const remainder = selected[1].data("value") - selected[0].data("value");
+      const lastCard = getLastCard();
+      const remainder = lastCard.data("value") - selected[0].data("value");
       if(remainder === 1) {
-        var previousParent = selected[0].parent();
-        var parent = selected[1].parent();
+        let previousParent = selected[0].parent();
+        let parent = selected[1].parent();
         const ppArray = getAllCards(previousParent);
-        console.log(ppArray);
 
-        if (ppArray.length === 1) {
-          parent.append(selected[0]);
-        }
-        else {
-          for(let i = 0; i < ppArray.length; i++) {
-            parent.append(ppArray[i]);
-          }
-          // parent.append(selected[0]);
-          console.log('more than one');
-        }
-
-        previousParent.children().last().removeClass('cover').addClass('show').contents().css('visibility', 'visible');
+        addAllCards(ppArray, parent);
+        showLastCard(previousParent);
       }
       emptySelectedArray();
+      checkForFullSequence();
     }
+  }
+
+  function getLastCard() {
+    return selected[1].parent().children().last();
   }
 
   function getAllCards(start) {
@@ -93,20 +90,45 @@ $(document).ready(function() {
       }
     }
 
-    let array = [];
-    for(let j = indexOfCardChosen; j < start.children().length; j++) {
-      array.push(start.children().eq(j));
+    let array = [start.children().eq(indexOfCardChosen)];
+    for(let j = indexOfCardChosen+1; j < start.children().length; j++) {
+      const val1 = start.children().eq(j).data('value');
+      const val2 = start.children().eq(j-1).data('value');
+
+      if (val2 - val1 === 1) {
+        array.push(start.children().eq(j));
+      }
+      else {
+        array = [];
+        break;
+      }
     }
 
     return array;
   }
 
+  function addAllCards(ppArray, parent) {
+    if (ppArray.length === 1) {
+      parent.append(selected[0]);
+    }
+    else {
+      for(let i = 0; i < ppArray.length; i++) {
+        parent.append(ppArray[i]);
+      }
+    }
+  }
+
   function fillEmptySlot() {
     if(selected.length == 2) {
       if(selected[1].hasClass('slot')) {
-        var previousParent = selected[0].parent();
-        $(selected[1]).append(selected[0]);
-        previousParent.children().last().removeClass('cover').addClass('show').contents().css('visibility', 'visible');
+        let previousParent = selected[0].parent();
+        let pArray = getAllCards(previousParent);
+
+        addAllCards(pArray, selected[1]);
+
+        // previousParent.children().last().removeClass('cover').addClass('show').contents().css('visibility', 'visible');
+
+        showLastCard(previousParent);
       }
       emptySelectedArray();
     }
@@ -117,6 +139,73 @@ $(document).ready(function() {
       selected[i].removeClass('selected');
     }
     selected = [];
+  }
+
+  function showLastCard(container) {
+    container.children().last().removeClass('cover').addClass('show').contents().css('visibility', 'visible');
+  }
+
+  function checkForFullSequence() {
+    const kings = $('.show[data-value="13"]');
+    let kingIndex = 0;
+    if (kings.length > 0) {
+      for (let i = 0; i < kings.length; i++) {
+        const parent = kings.eq(i).parent();
+        const elements = parent.children('.show');
+        for (let j = elements.length-1; j >= 0; j--) {
+          if ($(elements[j]).data('value')===13) {
+            const status = isFullSequence(elements, j);
+
+            if (status != false) {
+              console.log(status.length);
+              if(status.length === 13) {
+                upDeck++;
+                const previousParent = $(status[0]).parent();
+                const winnerSlots = $('.finished-deck-slots .slot');
+
+                for(let k = 0; k < winnerSlots.length; k++) {
+                  if (winnerSlots.eq(k).children().length === 0) {
+                    for(let l = status.length-1; l >= 0; l--) {
+                      winnerSlots.eq(k).append(status[l]);
+                    }
+                    showLastCard(previousParent);
+                    break;
+                  }
+                }
+                if(upDeck === 5) {
+                  isWinner();
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  function isFullSequence(arr, startIndex) {
+    if (arr.length - startIndex > 1) {
+      let arr2 = [arr[startIndex]];
+
+      for (let i = startIndex+1; i < arr.length; i++) {
+        const remainder = $(arr[i-1]).data('value') - $(arr[i]).data('value');
+        console.log(remainder);
+
+        if(remainder === 1) {
+          arr2.push(arr[i]);
+        }
+        else {
+          arr2 = [];
+          return false;
+        }
+      }
+      return arr2;
+    }
+    return false;
+  }
+
+  function isWinner() {
+    alert("you win");
   }
 
   function distributeInitialCards() {
