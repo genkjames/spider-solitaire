@@ -27,10 +27,10 @@ $(document).ready(function() {
 
   function viewDeck(deck) {
     for(let i = 0; i < deck.length; i++) {
-      let card = $(`<div class="card cover ${deck[i].suit}" value=${deck[i].value}></div`);
+      let card = $(`<div class="card cover ${deck[i].suit}" data-value=${deck[i].value}></div`);
       let p = $(`<p></p>`).text(`${deck[i].rank}`);
       card.append(p);
-      card.append(p.clone());
+      // card.append(p.clone());
       card.contents().css('visibility', 'hidden');
       $('.deck .slot').append(card);
     }
@@ -39,16 +39,84 @@ $(document).ready(function() {
   let selected = [];
 
   function showClicks() {
-    $('.show').on('click', function(e) {
-      if(selected.length < 2) {
-        selected.push($(e.target));
-        $(e.target).addClass('selected');
-        console.log(2);
+    $('.playing-field').on('click', function(e) {
+      if($(e.target).hasClass('selected')) {
+        $(e.target).removeClass('selected');
+        selected.pop();
       }
-      else {
-        console.log(selected.indexOf($(e.target)));
+      else if($(e.target).hasClass('show')) {
+        if(selected.length < 2 && !$(e.target).hasClass('selected')) {
+          selected.push($(e.target));
+          $(e.target).addClass('selected');
+          compareCards();
+        }
+      }
+      else if($(e.target).hasClass('slot')) {
+        selected.push($(e.target));
+        fillEmptySlot();
       }
     });
+  }
+
+  function compareCards() {
+    if(selected.length === 2) {
+      const remainder = selected[1].data("value") - selected[0].data("value");
+      if(remainder === 1) {
+        var previousParent = selected[0].parent();
+        var parent = selected[1].parent();
+        const ppArray = getAllCards(previousParent);
+        console.log(ppArray);
+
+        if (ppArray.length === 1) {
+          parent.append(selected[0]);
+        }
+        else {
+          for(let i = 0; i < ppArray.length; i++) {
+            parent.append(ppArray[i]);
+          }
+          // parent.append(selected[0]);
+          console.log('more than one');
+        }
+
+        previousParent.children().last().removeClass('cover').addClass('show').contents().css('visibility', 'visible');
+      }
+      emptySelectedArray();
+    }
+  }
+
+  function getAllCards(start) {
+    let indexOfCardChosen = 0;
+    for(let i = 0; i < start.children().length; i++) {
+      if(start.children().eq(i).hasClass('selected')) {
+        indexOfCardChosen = i;
+        break;
+      }
+    }
+
+    let array = [];
+    for(let j = indexOfCardChosen; j < start.children().length; j++) {
+      array.push(start.children().eq(j));
+    }
+
+    return array;
+  }
+
+  function fillEmptySlot() {
+    if(selected.length == 2) {
+      if(selected[1].hasClass('slot')) {
+        var previousParent = selected[0].parent();
+        $(selected[1]).append(selected[0]);
+        previousParent.children().last().removeClass('cover').addClass('show').contents().css('visibility', 'visible');
+      }
+      emptySelectedArray();
+    }
+  }
+
+  function emptySelectedArray() {
+    for(let i = 0; i < selected.length; i++) {
+      selected[i].removeClass('selected');
+    }
+    selected = [];
   }
 
   function distributeInitialCards() {
@@ -56,6 +124,7 @@ $(document).ready(function() {
     const playingFields = $('.playing-field .slot');
     const numOfCards = cards.length - (playingFields.length * 5);
     distribute(numOfCards);
+    showClicks();
   }
 
   let p = 0;
@@ -89,7 +158,6 @@ $(document).ready(function() {
       }
       else {
         clearInterval(addCards);
-        showClicks();
       }
     }, 60);
   }
@@ -102,7 +170,8 @@ $(document).ready(function() {
     const suit = $("[name='suit']").val();
 
     $('#player-name').text(name);
-    viewDeck(shuffle(makeDeck(suit, 5)));
+    const finalDeck = shuffle(makeDeck(suit, 5));
+    viewDeck(finalDeck);
     distributeInitialCards();
   });
 

@@ -254,6 +254,50 @@ button {
   top: 270px;
 }
 
+.playing-field .card:nth-of-type(20) {
+  top: 285px;
+}
+
+.playing-field .card:nth-of-type(21) {
+  top: 300px;
+}
+
+.playing-field .card:nth-of-type(22) {
+  top: 315px;
+}
+
+.playing-field .card:nth-of-type(23) {
+  top: 330px;
+}
+
+.playing-field .card:nth-of-type(24) {
+  top: 345px;
+}
+
+.playing-field .card:nth-of-type(25) {
+  top: 360px;
+}
+
+.playing-field .card:nth-of-type(26) {
+  top: 375px;
+}
+
+.playing-field .card:nth-of-type(27) {
+  top: 390px;
+}
+
+.playing-field .card:nth-of-type(28) {
+  top: 405px;
+}
+
+.playing-field .card:nth-of-type(29) {
+  top: 420px;
+}
+
 .selected {
   outline: solid blue 2px;
+}
+
+.show p {
+  pointer-events: none;
 }
