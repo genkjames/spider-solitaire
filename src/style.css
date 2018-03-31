@@ -6,7 +6,7 @@
 
 body {
   font-size: 16px;
-  font-family: "Times New Roman", "Times", "Georgia", serif;
+  font-family: 'times new roman', 'times', 'georgia', serif;
   width: 100%;
 }
 
@@ -16,7 +16,7 @@ fieldset label {
 
 section h1 {
   font-size: 80px;
-  color: #FFF;
+  color: #fff;
 }
 
 .title-card {
@@ -79,7 +79,8 @@ section {
   z-index: 1;
 }
 
-.title, .cards {
+.title,
+.cards {
   width: 70%;
   position: relative;
 }
@@ -87,7 +88,7 @@ section {
 .side-bar {
   padding: 50px 20px;
   width: 30%;
-  background: linear-gradient(#FFF, #F3F3F3);
+  background: linear-gradient(#fff, #f3f3f3);
 }
 
 button {
@@ -105,8 +106,14 @@ button {
 }
 
 .cards > p {
+  display: inline-block;
+  width: 48%;
   font-size: 24px;
   color: white;
+}
+
+.cards > p:nth-of-type(2) {
+  text-align: right;
 }
 
 .game-buttons {
@@ -144,11 +151,11 @@ button {
 
 .slot {
   position: relative;
-  width: 100px;
-  height: 160px;
+  width: 90px;
+  height: 120px;
   margin: 20px 0px 20px 30px;
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, .5);
 }
 
 .deck .slot {
@@ -165,133 +172,76 @@ button {
   height: inherit;
   border-radius: inherit;
   border: 1px solid gray;
-  background: white;
   top: 0;
   left: 0;
   overflow: hidden;
+  background-image: url('../images/spider.png'),
+      linear-gradient(white, white);
+  background-repeat: no-repeat,
+      no-repeat;
+  background-position: center,
+      left;
+      background-size: contain, cover;
+}
+
+.card p {
+  position: absolute;
+  font-size: 16px;
+  padding: 3px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.card p:nth-of-type(1) {
+  top: 0;
+  left: 0;
+}
+
+.card p:nth-of-type(2) {
+  bottom: 0;
+  right: 0;
+  transform: rotate(180deg);
 }
 
 .cover {
-  width: 100%;
-  height: 100%;
-  background: red url('../images/spider.png') center no-repeat;
+  background-image: url('../images/spider.png'),
+      linear-gradient(rgb(255, 0, 0), rgb(255, 255, 255));
+}
+
+.diamond::after {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: url('../images/diamond.png') center no-repeat;
   background-size: contain;
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: inherit;
 }
 
-.playing-field .card:nth-of-type(2) {
-  top: 15px;
+.heart::after {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: url('../images/heart.png') center no-repeat;
+  background-size: contain;
 }
 
-.playing-field .card:nth-of-type(3) {
-  top: 30px;
+.clover::after {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: url('../images/clover.png') center no-repeat;
+  background-size: contain;
 }
 
-.playing-field .card:nth-of-type(4) {
-  top: 45px;
-}
-
-.playing-field .card:nth-of-type(5) {
-  top: 60px;
-}
-
-.playing-field .card:nth-of-type(6) {
-  top: 75px;
-}
-
-.playing-field .card:nth-of-type(7) {
-  top: 90px;
-}
-
-.playing-field .card:nth-of-type(8) {
-  top: 105px;
-}
-
-.playing-field .card:nth-of-type(9) {
-  top: 120px;
-}
-
-.playing-field .card:nth-of-type(10) {
-  top: 135px;
-}
-
-.playing-field .card:nth-of-type(11) {
-  top: 150px;
-}
-
-.playing-field .card:nth-of-type(12) {
-  top: 165px;
-}
-
-.playing-field .card:nth-of-type(13) {
-  top: 180px;
-}
-
-.playing-field .card:nth-of-type(14) {
-  top: 195px;
-}
-
-.playing-field .card:nth-of-type(15) {
-  top: 210px;
-}
-
-.playing-field .card:nth-of-type(16) {
-  top: 225px;
-}
-
-.playing-field .card:nth-of-type(17) {
-  top: 240px;
-}
-
-.playing-field .card:nth-of-type(18) {
-  top: 255px;
-}
-
-.playing-field .card:nth-of-type(19) {
-  top: 270px;
-}
-
-.playing-field .card:nth-of-type(20) {
-  top: 285px;
-}
-
-.playing-field .card:nth-of-type(21) {
-  top: 300px;
-}
-
-.playing-field .card:nth-of-type(22) {
-  top: 315px;
-}
-
-.playing-field .card:nth-of-type(23) {
-  top: 330px;
-}
-
-.playing-field .card:nth-of-type(24) {
-  top: 345px;
-}
-
-.playing-field .card:nth-of-type(25) {
-  top: 360px;
-}
-
-.playing-field .card:nth-of-type(26) {
-  top: 375px;
-}
-
-.playing-field .card:nth-of-type(27) {
-  top: 390px;
-}
-
-.playing-field .card:nth-of-type(28) {
-  top: 405px;
-}
-
-.playing-field .card:nth-of-type(29) {
-  top: 420px;
+.spade::after {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 18px;
+  background: url('../images/spade.png') center no-repeat;
+  background-size: contain;
 }
 
 .selected {
@@ -300,4 +250,116 @@ button {
 
 .show p {
   pointer-events: none;
+}
+
+.playing-field .card:nth-of-type(2) {
+  top: 20px;
+}
+
+.playing-field .card:nth-of-type(3) {
+  top: 40px;
+}
+
+.playing-field .card:nth-of-type(4) {
+  top: 60px;
+}
+
+.playing-field .card:nth-of-type(5) {
+  top: 80px;
+}
+
+.playing-field .card:nth-of-type(6) {
+  top: 100px;
+}
+
+.playing-field .card:nth-of-type(7) {
+  top: 120px;
+}
+
+.playing-field .card:nth-of-type(8) {
+  top: 140px;
+}
+
+.playing-field .card:nth-of-type(9) {
+  top: 160px;
+}
+
+.playing-field .card:nth-of-type(10) {
+  top: 180px;
+}
+
+.playing-field .card:nth-of-type(11) {
+  top: 200px;
+}
+
+.playing-field .card:nth-of-type(12) {
+  top: 220px;
+}
+
+.playing-field .card:nth-of-type(13) {
+  top: 240px;
+}
+
+.playing-field .card:nth-of-type(14) {
+  top: 260px;
+}
+
+.playing-field .card:nth-of-type(15) {
+  top: 280px;
+}
+
+.playing-field .card:nth-of-type(16) {
+  top: 300px;
+}
+
+.playing-field .card:nth-of-type(17) {
+  top: 320px;
+}
+
+.playing-field .card:nth-of-type(18) {
+  top: 340px;
+}
+
+.playing-field .card:nth-of-type(19) {
+  top: 360px;
+}
+
+.playing-field .card:nth-of-type(20) {
+  top: 380px;
+}
+
+.playing-field .card:nth-of-type(21) {
+  top: 400px;
+}
+
+.playing-field .card:nth-of-type(22) {
+  top: 420px;
+}
+
+.playing-field .card:nth-of-type(23) {
+  top: 440px;
+}
+
+.playing-field .card:nth-of-type(24) {
+  top: 460px;
+}
+
+.playing-field .card:nth-of-type(25) {
+  top: 480px;
+}
+
+.playing-field .card:nth-of-type(26) {
+  top: 500px;
+}
+
+.playing-field .card:nth-of-type(27) {
+  top: 520px;
+}
+
+.playing-field .card:nth-of-type(28) {
+  top: 540px;
+}
+
+.playing-field .card:nth-of-type(29) {
+  top: 560px;
 }
