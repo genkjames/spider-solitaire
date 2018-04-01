@@ -4,106 +4,111 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Genaya's Spider Solitaire</title>
+  <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
   <link rel="stylesheet" href="src/style.css">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
 <body>
-  <section id="landing" class="landing-page">
-    <div class="title">
-      <h1>Spider Solitaire</h1>
-      <div id="tc1" class="title-card"></div>
-      <div id="tc2" class="title-card"></div>
-      <div id="tc3" class="title-card"></div>
-    </div>
-    <div class="side-bar">
-      <div class="form-container">
-        <form id="form">
-          <label>Name: <input type="text" name="name"></label>
+  <div class="body-copy">
+    <div class="half"><div class="body-cover"></div></div>
+    <div class="half"><div class="body-cover"></div></div>
+  </div>
+  <div class="wrapper">
+    <section id="landing" class="landing-page">
+      <div class="side-bar">
+        <div class="form-container">
+          <form id="form">
+            <label>Name: <input type="text" name="name"></label>
 
-          <fieldset>
-            <legend>Suit</legend>
-            <label><input type="radio" name="suit" value="diamond">Diamond</label>
-            <label><input type="radio" name="suit" value="heart">Heart</label>
-            <label><input type="radio" name="suit" value="clover">Clover</label>
-            <label><input type="radio" name="suit" value="spade">Spade</label>
-          </fieldset>
+            <fieldset>
+              <legend>Suit</legend>
+              <label><input type="radio" name="suit" value="diamond">Diamond</label>
+              <label><input type="radio" name="suit" value="heart">Heart</label>
+              <label><input type="radio" name="suit" value="clover">Clover</label>
+              <label><input type="radio" name="suit" value="spade">Spade</label>
+            </fieldset>
 
-          <button id="submit">Enter</button>
-        </form>
+            <button id="submit">Enter</button>
+          </form>
+        </div>
+
+        <div class="rules">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
       </div>
+      <div class="title">
+        <div><h1>Spider Solitaire</h1></div>
+        <div id="title-cards"></div>
+      </div>
+    </section>
 
-      <div class="rules">
+    <section class="game-page">
+      <div class="side-bar">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
         consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
         cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div>
-    </div>
-  </section>
 
-  <section class="game-page">
-    <div class="side-bar">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-      <div class="game-buttons">
-        <button id="pause">Pause</button>
-        <button id="reset">Reset</button>
-        <button id="undo">Undo</button>
-      </div>
-    </div>
-
-    <div class="cards">
-      <p><span id="player-name"></span> Game Score: <span id="score"></span></p>
-      <p><span id="minuteValue">7</span> : <span id="secondValue">00</span></p>
-      <div class="top-row">
-        <div class="deck">
-          <div class="slot"></div>
-        </div>
-
-        <div class="finished-deck-slots">
-          <div class="slot"></div>
-          <div class="slot"></div>
-          <div class="slot"></div>
-          <div class="slot"></div>
-          <div class="slot"></div>
+        <div class="game-buttons">
+          <button id="pause">Pause</button>
+          <button id="reset">Reset</button>
+          <button id="undo">Undo</button>
         </div>
       </div>
 
-      <div class="playing-field">
-        <div class="slot"></div>
-        <div class="slot"></div>
-        <div class="slot"></div>
-        <div class="slot"></div>
-        <div class="slot"></div>
-        <div class="slot"></div>
-        <div class="slot"></div>
-      </div>
-    </div>
-  </section>
+      <div class="cards">
+        <p><span id="player-name"></span> Game Score: <span id="score"></span></p>
+        <p><span id="minuteValue">7</span> : <span id="secondValue">00</span></p>
+        <div class="top-row">
+          <div class="deck">
+            <div class="slot"></div>
+          </div>
 
-  <div id="game-status-container" class="status-container">
-    <div>
-      <div class="stars">
-        <!-- SVG is from https://upload.wikimedia.org/wikipedia/commons/6/63/Star%2A.svg -->
+          <div class="finished-deck-slots">
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+          </div>
+        </div>
+
+        <div class="playing-field">
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+        </div>
+      </div>
+    </section>
+
+    <div id="game-status-container" class="status-container">
+      <div>
+        <div class="stars">
+          <!-- SVG is from https://upload.wikimedia.org/wikipedia/commons/6/63/Star%2A.svg -->
+            <svg viewBox="0 0 300 275" xmlns="http://www.w3.org/2000/svg" version="1.1">
+              <polygon points="150,25  179,111 269,111 197,165 223,251  150,200 77,251  103,165 31,111 121,111" />
+          </svg>
           <svg viewBox="0 0 300 275" xmlns="http://www.w3.org/2000/svg" version="1.1">
-            <polygon points="150,25  179,111 269,111 197,165 223,251  150,200 77,251  103,165 31,111 121,111" />
-        </svg>
-        <svg viewBox="0 0 300 275" xmlns="http://www.w3.org/2000/svg" version="1.1">
-            <polygon points="150,25  179,111 269,111 197,165 223,251  150,200 77,251  103,165 31,111 121,111" />
-        </svg>
-        <svg viewBox="0 0 300 275" xmlns="http://www.w3.org/2000/svg" version="1.1">
-            <polygon points="150,25  179,111 269,111 197,165 223,251  150,200 77,251  103,165 31,111 121,111" />
-        </svg>
+              <polygon points="150,25  179,111 269,111 197,165 223,251  150,200 77,251  103,165 31,111 121,111" />
+          </svg>
+          <svg viewBox="0 0 300 275" xmlns="http://www.w3.org/2000/svg" version="1.1">
+              <polygon points="150,25  179,111 269,111 197,165 223,251  150,200 77,251  103,165 31,111 121,111" />
+          </svg>
+        </div>
+        <p id="status">Congrats!!!</p>
+        <button id="close">Close</button>
       </div>
-      <p id="status">Congrats!!!</p>
-      <button id="close">Close</button>
     </div>
   </div>
   <script src="src/app.js"></script>

@@ -10,64 +10,108 @@ body {
   width: 100%;
 }
 
+.body-copy {
+  position: absolute;
+  width: 100vw;
+  min-height: 1000px;
+  max-height: 1300px;
+  display: flex;
+}
+
+.body-copy .half{
+  flex: 1;
+  z-index: -1;
+}
+
+.half:nth-of-type(1) {
+  background: linear-gradient(rgb(255, 255, 255), rgb(243, 243, 243));
+}
+
+.half:nth-of-type(2) {
+  background: linear-gradient(rgb(0, 128, 0), rgb(0, 100, 0));
+}
+
+.body-copy .body-cover {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  background: pink;
+}
+
+.half:nth-of-type(1) .body-cover{
+  background: linear-gradient(rgb(255, 255, 255), rgb(243, 243, 243));
+}
+
+.half:nth-of-type(2) .body-cover{
+  background: rgba(0, 0, 0, .5);
+}
+
 fieldset label {
   display: block;
 }
 
+.wrapper {
+  max-width: 1500px;
+  min-height: 1000px;
+  max-height: 1300px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 3;
+  overflow-x: hidden;
+}
+
 section h1 {
+  font-family: 'Special Elite', cursive;
   font-size: 80px;
+  margin-top: 300px;
+  text-align: center;
   color: #fff;
+  text-transform: uppercase;
 }
 
-.title-card {
-  width: 250px;
-  height: 380px;
-  border: 1px solid black;
-  background: black;
+.title {
+  position: relative;
+}
+
+.title > div:nth-of-type(1) {
   position: absolute;
-  top: 50px;
-  left: 80px;
-  transform: translate(20px, 30px) rotate(40deg);
-  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .5);
+  z-index: 1;
 }
 
-#tc1 {
-  top: 50px;
-  left: 80px;
-  background: red;
-}
-
-#tc2 {
-  top: 160px;
-  left: 130px;
-  background: yellow;
-}
-
-#tc3 {
-  top: 280px;
-  left: 180px;
-  background: blue;
+.title > div:nth-of-type(2){
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+  overflow-x: scroll;
+  padding-top: 15px;
+  overflow: hidden;
 }
 
 section {
-  width: 100%;
-  max-width: 1500px;
-  height: 100%;
-  min-height: 736px;
+  min-height: inherit;
+  max-height: inherit;
   background: linear-gradient(green, darkgreen);
   position: absolute;
   top: 0;
   left: 0;
   display: flex;
+  overflow: hidden;
 }
 
 @keyframes slide {
   0% {
-    left: 0;
+    top: 0;
   }
 
   100% {
-    left: -100%;
+    top: -200%;
   }
 }
 
@@ -172,8 +216,8 @@ button {
 
 .card {
   position: absolute;
-  width: inherit;
-  height: inherit;
+  width: 90px;
+  height: 120px;
   border-radius: inherit;
   border: 1px solid gray;
   top: 0;
