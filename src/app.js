@@ -16,15 +16,15 @@ $(document).ready(function() {
   }
 
   function makeDeck(suitName, numOfSets) {
-    const ranks = ["K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2", "A"];
+    const ranks = ['K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'A'];
     const deck = [];
     let val = ranks.length;
 
-    for (let i = 0; i < ranks.length; i++) {
-      for(let j = 0; j < numOfSets; j++) {
-        deck.push({suit: suitName, rank: ranks[i], value: val});
+    for (let i = 0; i < ranks.length; i += 1) {
+      for (let j = 0; j < numOfSets; j += 1) {
+        deck.push({ suit: suitName, rank: ranks[i], value: val });
       }
-      val--;
+      val -= 1;
     }
     return deck;
   }
@@ -32,8 +32,8 @@ $(document).ready(function() {
   function shuffle(deck) {
     const shuffledDeck = [];
 
-    while(deck.length > 0) {
-      let cardNum = Math.round(Math.random()*(deck.length-1));
+    while (deck.length > 0) {
+      const cardNum = Math.round(Math.random() * (deck.length - 1));
       shuffledDeck.push(deck[cardNum]);
       deck.splice(cardNum, 1);
     }
@@ -42,9 +42,9 @@ $(document).ready(function() {
   }
 
   function viewDeck(deck) {
-    for(let i = 0; i < deck.length; i++) {
-      let $card = $(`<div class="card cover" data-value=${deck[i].value}></div`);
-      let $p = $(`<p class="${deck[i].suit}"></p>`).text(`${deck[i].rank}`);
+    for (let i = 0; i < deck.length; i += 1) {
+      const $card = $(`<div class="card cover" data-value=${deck[i].value}></div`);
+      const $p = $(`<p class="${deck[i].suit}"></p>`).text(`${deck[i].rank}`);
       $card.append($p);
       $card.append($p.clone());
       $card.contents().css('visibility', 'hidden');
@@ -55,7 +55,6 @@ $(document).ready(function() {
   let selected = [];
 
   function showClicks() {
-    $('.playing-field').off('click');
     $('.playing-field').on('click', function(e) {
       if ($(e.target).hasClass('selected')) {
         $(e.target).removeClass('selected');
@@ -75,13 +74,18 @@ $(document).ready(function() {
     });
   }
 
+  function removeClicks() {
+    $('.playing-field').off('click');
+    $('.deck .slot').off('click');
+  }
+
   function compareCards() {
     if (selected.length === 2) {
       const lastCard = getLastCard();
-      const remainder = lastCard.data("value") - selected[0].data("value");
+      const remainder = lastCard.data('value') - selected[0].data('value');
       if (remainder === 1) {
-        let previousParent = selected[0].parent();
-        let parent = selected[1].parent();
+        const previousParent = selected[0].parent();
+        const parent = selected[1].parent();
         const ppArray = getAllCards(previousParent);
         let hideLastCard = true;
 
@@ -89,7 +93,7 @@ $(document).ready(function() {
           hideLastCard = false;
         }
 
-        let moves = new Moves([ppArray], [previousParent], hideLastCard, false);
+        const moves = new Moves([ppArray], [previousParent], hideLastCard, false);
         moves.addToArray();
 
         addAllCards(ppArray, parent);
@@ -238,6 +242,7 @@ $(document).ready(function() {
     const $playingFields = $('.playing-field .slot');
     const numOfCards = $cards.length - ($playingFields.length * 5);
     distribute(numOfCards);
+    removeClicks();
     showClicks();
   }
 
@@ -306,6 +311,21 @@ $(document).ready(function() {
   function isWinner() {
     clearInterval(startTimer);
     const score = gameScore();
+    const svg = $('svg');
+    svg.css('fill', '#ffffff');
+    let sc = 0;
+
+    if (score < 1200) {
+      sc = 1;
+    } else if (score < 2800) {
+      sc = 2;
+    } else {
+      sc = 3;
+    }
+
+    for (let i = 0; i < sc; i += 1) {
+      svg.eq(i).css('fill', '#fdff00');
+    }
     $('#game-status-container').css('display', 'block');
     $('#status').text(`Congratulations! You got a score of ${score}.`);
   }
@@ -336,8 +356,7 @@ $(document).ready(function() {
         gameScore();
         clearInterval(startTimer);
         loss();
-        $('.playing-field').off('click');
-        $('.deck .slot').off('click');
+        removeClicks();
         moveHistory = [];
       }
 
@@ -372,22 +391,25 @@ $(document).ready(function() {
     const finalDeck = shuffle(makeDeck(suit, 5));
     viewDeck(finalDeck);
     distributeInitialCards();
+    clickDeck();
     gameScore();
     setTimeout(function() {
       startTimer = setInterval(timer, 1000);
     }, 1400);
   }
 
+  function clickDeck() {
+    $('.deck .slot').on('click', function() {
+      if($('.deck .slot .card').length > 0) {
+        distribute($('.playing-field .slot').length);
+      }
+    });
+  }
+
   $("#submit").on("click", function(e){
     e.preventDefault();
     $("#landing").css("animation", "slide 1s ease-out 0s 1 forwards");
     play();
-  });
-
-  $('.deck .slot').on('click', function() {
-    if($('.deck .slot .card').length > 0) {
-      distribute($('.playing-field .slot').length);
-    }
   });
 
   $('#undo').on('click', function() {
@@ -422,10 +444,13 @@ $(document).ready(function() {
     if(pause) {
       $(this).text("Play");
       clearInterval(startTimer);
+      removeClicks();
     }
     else {
       $(this).text("Pause");
       startTimer = setInterval(timer, 1000);
+      clickDeck();
+      showClicks();
     }
     pause = !pause;
   });
