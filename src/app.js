@@ -186,7 +186,6 @@ $(document).ready(function() {
         for (let j = elements.length-1; j >= 0; j--) {
           if ($(elements[j]).data('value')===13) {
             const status = isFullSequence(elements, j);
-            console.log(status);
             if (status != false) {
               if(status.length === 13) {
                 upDeck++;
@@ -232,11 +231,6 @@ $(document).ready(function() {
       return arr2;
     }
     return false;
-  }
-
-  function isWinner() {
-    clearInterval(startTimer);
-    alert("you win");
   }
 
   function distributeInitialCards() {
@@ -301,50 +295,84 @@ $(document).ready(function() {
     el.addClass('cover').removeClass('show').contents().css('visibility', 'hidden');
   }
 
-  function timer() {
-      let $h = parseInt($('#hourValue').text());
-      let $m = parseInt($('#minuteValue').text());
+  function gameScore() {
+    const m = parseInt($('#minuteValue').text());
+    const s = parseInt($('#secondValue').text());
+    const score = (((m * 60) + s) * 30) - 30;
+    $('#score').text(score);
+    return score;
+  }
 
-      if ($m === 0 && $h >= 0) {
-        $h -= 1;
-        $m = 60;
+  function isWinner() {
+    clearInterval(startTimer);
+    const score = gameScore();
+    $('#game-status-container').css('display', 'block');
+    $('#status').text(`Congratulations! You got a score of ${score}.`);
+  }
+
+  function loss() {
+    const score = gameScore();
+    $('svg').css('fill', '#ffffff');
+    $('#game-status-container').css('display', 'block');
+    $('#status').text(`You got a score of ${score}. Better luck next time!`);
+  }
+
+  function calculateScore() {
+    console.log('hi');
+  }
+
+  function timer() {
+      let $m = parseInt($('#minuteValue').text());
+      let $s = parseInt($('#secondValue').text());
+
+      if ($s === 0 && $m >= 0) {
+        $m -= 1;
+        $s = 60;
       }
 
-      $m -= 1;
+      $s -= 1;
 
-      if ($h === 0 && $m === 0) {
+      if ($m === 0 && $s === 0) {
+        gameScore();
         clearInterval(startTimer);
-        alert('you lose');
+        loss();
         $('.playing-field').off('click');
         $('.deck .slot').off('click');
         moveHistory = [];
       }
 
-      if ($m.toString().length === 1) {
-        $m = '0' + $m;
+      if($s % 10 === 0) {
+        gameScore();
       }
 
-      $('#hourValue').text($h);
+      if ($s.toString().length === 1) {
+        $s = '0' + $s;
+      }
+
       $('#minuteValue').text($m);
+      $('#secondValue').text($s);
 
   }
 
   let startTimer;
 
   function restartTimer() {
-    clearInterval(startTimer)
-    $('#hourValue').text('7');
-    $('#minuteValue').text('00');
+    clearInterval(startTimer);
+    $('#minuteValue').text('7');
+    $('#secondValue').text('00');
   }
 
   function play() {
     const name = $("[name='name']").val();
-    const suit = $("[name = 'suit']:checked").val();
-
+    let suit = $("[name = 'suit']:checked").val();
+    if (suit === undefined) {
+      suit = 'diamond';
+    }
     $('#player-name').text(name);
     const finalDeck = shuffle(makeDeck(suit, 5));
     viewDeck(finalDeck);
     distributeInitialCards();
+    gameScore();
     setTimeout(function() {
       startTimer = setInterval(timer, 1000);
     }, 1400);
@@ -387,5 +415,22 @@ $(document).ready(function() {
     upDeck = 0;
     restartTimer();
     play();
+  });
+
+  let pause = true;
+  $('#pause').on('click', function() {
+    if(pause) {
+      $(this).text("Play");
+      clearInterval(startTimer);
+    }
+    else {
+      $(this).text("Pause");
+      startTimer = setInterval(timer, 1000);
+    }
+    pause = !pause;
+  });
+
+  $('#close').on('click', function() {
+    $('#game-status-container').css('display', 'none');
   })
 });

@@ -91,16 +91,6 @@ section {
   background: linear-gradient(#fff, #f3f3f3);
 }
 
-button {
-  display: block;
-  margin: 0 auto;
-  padding: 12px 35px;
-  background: linear-gradient(green, darkgreen);
-  color: white;
-  font-size: 14px;
-  letter-spacing: 1px;
-}
-
 .cards {
   padding: 15px 35px;
 }
@@ -117,12 +107,26 @@ button {
 }
 
 .game-buttons {
-  width: 232px;
+  width: 333px;
   margin: 0 auto;
 }
 
 .game-buttons button {
   display: inline-block;
+}
+
+.game-buttons button:nth-of-type(2) {
+  margin: 0 20px;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  padding: 8px 25px;
+  background: linear-gradient(green, darkgreen);
+  color: white;
+  font-size: 14px;
+  letter-spacing: 1px;
 }
 
 .top-row {
@@ -250,6 +254,40 @@ button {
 
 .show p {
   pointer-events: none;
+}
+
+.status-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, .3);
+  z-index: 3;
+  display: none;
+}
+
+.status-container > div {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 30px;
+  width: 100%;
+  background: #fff;
+  text-align: center;
+}
+
+svg {
+  width: 109px;
+  height: 100px;
+  fill: #fdff00;
+  stroke: #605a00;
+  stroke-width: 8;
+}
+
+.status-container p {
+  font-size: 25px;
+  line-height: 70px;
 }
 
 .playing-field .card:nth-of-type(2) {

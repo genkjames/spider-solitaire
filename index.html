@@ -53,14 +53,15 @@
       proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
       <div class="game-buttons">
+        <button id="pause">Pause</button>
         <button id="reset">Reset</button>
         <button id="undo">Undo</button>
       </div>
     </div>
 
     <div class="cards">
-      <p>Good luck <span id="player-name"></span>!</p>
-      <p><span id="hourValue">7</span> : <span id="minuteValue">00</span></p>
+      <p><span id="player-name"></span> Game Score: <span id="score"></span></p>
+      <p><span id="minuteValue">7</span> : <span id="secondValue">00</span></p>
       <div class="top-row">
         <div class="deck">
           <div class="slot"></div>
@@ -86,6 +87,25 @@
       </div>
     </div>
   </section>
+
+  <div id="game-status-container" class="status-container">
+    <div>
+      <div class="stars">
+        <!-- SVG is from https://upload.wikimedia.org/wikipedia/commons/6/63/Star%2A.svg -->
+          <svg viewBox="0 0 300 275" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <polygon points="150,25  179,111 269,111 197,165 223,251  150,200 77,251  103,165 31,111 121,111" />
+        </svg>
+        <svg viewBox="0 0 300 275" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <polygon points="150,25  179,111 269,111 197,165 223,251  150,200 77,251  103,165 31,111 121,111" />
+        </svg>
+        <svg viewBox="0 0 300 275" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <polygon points="150,25  179,111 269,111 197,165 223,251  150,200 77,251  103,165 31,111 121,111" />
+        </svg>
+      </div>
+      <p id="status">Congrats!!!</p>
+      <button id="close">Close</button>
+    </div>
+  </div>
   <script src="src/app.js"></script>
 </body>
 </html>
