@@ -20,17 +20,6 @@ $(document).ready(function() {
     return ranks[Math.round(Math.random() * (ranks.length - 1))];
   }
 
-  function randomTop() {
-    const height = $('#title-cards').height();
-    console.log(height);
-    return Math.round(Math.random() * (height -120));
-  }
-
-  function randomLeft() {
-    const width = $('#title-cards').width();
-    return Math.round(Math.random() * (width - 120));
-  }
-
   function randomSymbol() {
     const symbols = ['diamond', 'heart', 'spade', 'clover'];
     return symbols[Math.round(Math.random() * (symbols.length - 1))];
@@ -38,9 +27,6 @@ $(document).ready(function() {
 
   function generateTitleCards() {
     const titleCards = $('#title-cards');
-    left = randomLeft();
-    console.log("top " + randomTop());
-    console.log("left " +left);
     const tops = [40, 180, 120, 190, 310, 342, 446, 696, 624, 141, 332, 497, 181, 385, 497, 374, 432, 268, 624, 490, 629, 24, 45, 615, 600, 19, 51, 266];
     const lefts = [80, 20, 190, 350, 165, 675, 174, 397, 574, 630, 352, 331, 827, 865, 569, 476, 44, 528, 743, 774, 197, 356, 522, 23, 935, 741, 931, 930];
     const degrees = [40, 60, 20, 80, 330, 80, 50, 80, 300, 150, 20, 10, 40, 280, 320, 350, 320, 40, 80, 133, 120, -50, 40, 40, 50, 109, 146, 97];
