@@ -16,29 +16,39 @@
   <div class="wrapper">
     <section id="landing" class="landing-page">
       <div class="side-bar">
-        <div class="form-container">
-          <form id="form">
-            <label>Name: <input type="text" name="name"></label>
-
-            <fieldset>
-              <legend>Suit</legend>
-              <label><input type="radio" name="suit" value="diamond">Diamond</label>
-              <label><input type="radio" name="suit" value="heart">Heart</label>
-              <label><input type="radio" name="suit" value="clover">Clover</label>
-              <label><input type="radio" name="suit" value="spade">Spade</label>
-            </fieldset>
-
-            <button id="submit">Enter</button>
-          </form>
-        </div>
-
         <div class="rules">
+          <h2>Rules</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
           consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
           cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="form-container">
+          <form id="form">
+            <h3>Name</h3>
+            <input type="text" name="name">
+            <h3>Suit</h3>
+            <div>
+              <input id="diamond" type="radio" name="suit" value="diamond">
+              <label for="diamond">Diamond</label>
+            </div>
+            <div>
+              <input id="heart" type="radio" name="suit" value="heart">
+              <label for="heart">Heart</label>
+            </div>
+            <div>
+              <input id="clover" type="radio" name="suit" value="clover">
+              <label for="clover">Clover</label>
+            </div>
+            <div>
+              <input id="spade" type="radio" name="suit" value="spade">
+              <label for="spade">Spade</label>
+            </div>
+
+            <button id="submit">Enter</button>
+          </form>
         </div>
       </div>
       <div class="title">
@@ -49,12 +59,15 @@
 
     <section class="game-page">
       <div class="side-bar">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="rules">
+          <h2>Rules</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
 
         <div class="game-buttons">
           <button id="pause">Pause</button>

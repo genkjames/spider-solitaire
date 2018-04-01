@@ -27,8 +27,8 @@ $(document).ready(function() {
 
   function generateTitleCards() {
     const titleCards = $('#title-cards');
-    const tops = [40, 180, 120, 190, 310, 342, 446, 696, 624, 141, 332, 497, 181, 385, 497, 374, 432, 268, 624, 490, 629, 24, 45, 615, 600, 19, 51, 266];
-    const lefts = [80, 20, 190, 350, 165, 675, 174, 397, 574, 630, 352, 331, 827, 865, 569, 476, 44, 528, 743, 774, 197, 356, 522, 23, 935, 741, 931, 930];
+    const tops = [40, 200, 120, 190, 310, 342, 446, 696, 624, 141, 332, 497, 181, 385, 497, 374, 432, 268, 624, 490, 629, 24, 45, 615, 600, 19, 51, 266];
+    const lefts = [80, 54, 190, 350, 165, 675, 174, 397, 574, 630, 352, 331, 827, 865, 569, 476, 44, 528, 743, 774, 197, 356, 522, 23, 935, 741, 931, 930];
     const degrees = [40, 60, 20, 80, 330, 80, 50, 80, 300, 150, 20, 10, 40, 280, 320, 350, 320, 40, 80, 133, 120, -50, 40, 40, 50, 109, 146, 97];
 
     for(let i = 0; i < tops.length; i += 1) {
@@ -440,8 +440,13 @@ $(document).ready(function() {
 
   $("#submit").on("click", function(e){
     e.preventDefault();
-    $('#landing').css('animation', 'slide 2s ease-out 0s 1 forwards');
-    $('.body-cover').css('animation', 'slide 2s ease-out 0s 1 forwards');
+    $('#landing').css('animation', 'fade 2s ease-out 0s 1 forwards');
+    $('.body-cover').css('animation', 'fade 2s ease-out 0s 1 forwards');
+    $('.side-body-cover').css('animation', 'fade 2s ease-out 0s 1 forwards');
+    setTimeout(function() {
+      $('#landing').css('display', 'none');
+    $('.body-cover').css('display', 'none');
+    }, 2000);
     setTimeout(play, 1500);
   });
 
