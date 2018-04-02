@@ -458,7 +458,7 @@ button:hover {
   left: 0;
   right: 0;
   background: rgba(0, 0, 0, .3);
-  z-index: 3;
+  z-index: 4;
   display: none;
 }
 
@@ -486,6 +486,12 @@ svg {
   font-size: 20px;
   line-height: 30px;
   margin: 10px 0;
+}
+
+/* Confetti */
+.piece {
+  position: absolute;
+  z-index: 3;
 }
 
 /* Playing Field margins per line*/
