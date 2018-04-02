@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Genaya's Spider Solitaire</title>
   <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
   <link rel="stylesheet" href="src/style.css">
@@ -14,17 +14,10 @@
     <div class="half"><div class="body-cover"></div></div>
   </div>
   <div class="wrapper">
+    <!-- Landing View -->
     <section id="landing" class="landing-page">
       <div class="side-bar">
-        <div class="rules">
-          <h2>Rules</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
+        <!-- Form -->
         <div class="form-container">
           <form id="form">
             <h3>Name</h3>
@@ -50,35 +43,49 @@
             <button id="submit">Enter</button>
           </form>
         </div>
+        <!-- Rules -->
+        <div class="rules">
+          <h2>About</h2>
+          <p>You have 8 minutes to get 5 sequences of cards that have a set of K to A. Click on the card you want to move first, and then click on a card that has one less value than the previous card.  If you run out of moves you can click on the deck in the upper left corner to distribute more cards to the playing field.</p>
+        </div>
       </div>
       <div class="title">
         <div><h1>Spider Solitaire</h1></div>
         <div id="title-cards"></div>
       </div>
     </section>
-
+    <!-- Game View -->
     <section class="game-page">
-      <div class="side-bar">
-        <div class="rules">
-          <h2>Rules</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-
+      <div class="side-bar-button">
+        <p class="menu"><span>R</span><span>U</span><span>L</span><span>E</span><span>S</span></p>
+      </div>
+      <div class="options side-bar">
+        <div id="back" class="back">Go Back</div>
+        <!-- Game Buttons -->
         <div class="game-buttons">
           <button id="pause">Pause</button>
           <button id="reset">Reset</button>
           <button id="undo">Undo</button>
         </div>
+        <!-- Rules -->
+        <div class="rules">
+          <h2>Rules</h2>
+          <ol>
+            <li><p>You have 8 minutes to get 5 sequences of cards that have a set of K to A.</p></li>
+            <li><p>Click on the card you want to move first, and then click on a card that has one less value than the previous card.</p></li>
+            <li><p>You can move more than one card to another slot, as long as the cards are lined up in order from the greatest value to the least value.</p> <p class="ex">i.e, K -> Q -> J</p></li>
+            <li><p>If you run out of moves you can click on the deck in the upper left corner to distribute more cards to the playing field.</p></li>
+            <li><p>The Undo button is your best friend in this game. It can only be used to undo moves from the last sequence of cards from K to A you were able to get in order.</p></li>
+          </ol>
+        </div>
       </div>
 
+      <!-- Cards -->
       <div class="cards">
-        <p><span id="player-name"></span> Game Score: <span id="score"></span></p>
-        <p><span id="minuteValue">7</span> : <span id="secondValue">00</span></p>
+        <div class="scoring-status">
+          <p>Game Score: <span id="score"></span></p>
+          <p><span id="minuteValue">8</span> : <span id="secondValue">00</span></p>
+        </div>
         <div class="top-row">
           <div class="deck">
             <div class="slot"></div>
@@ -94,17 +101,20 @@
         </div>
 
         <div class="playing-field">
-          <div class="slot"></div>
-          <div class="slot"></div>
-          <div class="slot"></div>
-          <div class="slot"></div>
-          <div class="slot"></div>
-          <div class="slot"></div>
-          <div class="slot"></div>
+          <div class="pl-slots">
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+            <div class="slot"></div>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- Game Status -->
     <div id="game-status-container" class="status-container">
       <div>
         <div class="stars">

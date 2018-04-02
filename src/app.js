@@ -355,13 +355,15 @@ $(document).ready(function() {
     }
   }
 
-  function isWinner() {
+  let name = "";
+
+  function isWinner(score) {
     clearInterval(startTimer);
     $('#pause').off('click');
     const score = gameScore();
     calculateScore(score);
     $('#game-status-container').css('display', 'block');
-    $('#status').text(`Congratulations! You got a score of ${score}.`);
+    $('#status').text(`Congratulations${name}! You got a score of ${score}.`);
   }
 
   function loss() {
@@ -369,7 +371,7 @@ $(document).ready(function() {
     $('#pause').off('click');
     $('svg').css('fill', '#ffffff');
     $('#game-status-container').css('display', 'block');
-    $('#status').text(`You got a score of ${score}. Better luck next time!`);
+    $('#status').text(`You got a score of ${score}. Better luck next time${name}!`);
   }
 
   function timer() {
@@ -408,12 +410,11 @@ $(document).ready(function() {
 
   function restartTimer() {
     clearInterval(startTimer);
-    $('#minuteValue').text('7');
+    $('#minuteValue').text('8');
     $('#secondValue').text('00');
   }
 
   function play() {
-    const name = $("[name='name']").val();
     let suit = $("[name = 'suit']:checked").val();
     if (suit === undefined) {
       suit = 'diamond';
@@ -440,6 +441,9 @@ $(document).ready(function() {
 
   $("#submit").on("click", function(e){
     e.preventDefault();
+    if($('[name="name"]').val() !== "") {
+      name = " "+$("[name='name']").val();
+    }
     $('#landing').css('animation', 'fade 2s ease-out 0s 1 forwards');
     $('.body-cover').css('animation', 'fade 2s ease-out 0s 1 forwards');
     $('.side-body-cover').css('animation', 'fade 2s ease-out 0s 1 forwards');
@@ -498,5 +502,22 @@ $(document).ready(function() {
 
   $('#close').on('click', function() {
     $('#game-status-container').css('display', 'none');
-  })
+  });
+
+  $(window).on('resize', function() {
+    if($(this).width() > 1150) {
+      $('.options').css('display', 'block');
+    }
+    else {
+      $('.options').css('display', 'none');
+    }
+  });
+
+  $('.side-bar-button').on('click', function() {
+    $('.options').css('display', 'block');
+  });
+
+  $('.back').on('click', function() {
+    $('.options').css('display', 'none');
+  });
 });
