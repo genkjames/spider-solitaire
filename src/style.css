@@ -463,28 +463,29 @@ button:hover {
 }
 
 .status-container > div {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin: 200px auto 0;
+  width: 500px;
   padding: 30px;
-  width: 100%;
-  background: #fff;
-  background: rgba(255, 255, 255, .8);
+  background: rgba(37, 37, 37, .9);
   text-align: center;
+  color: #fff;
 }
 
 /* Stars */
 svg {
-  width: 109px;
-  height: 100px;
+  width: 80px;
+  height: 87px;
   fill: #fdff00;
   stroke: #605a00;
-  stroke-width: 8;
+  stroke-width: 10;
 }
 
 .status-container p {
-  font-size: 25px;
-  line-height: 70px;
+  font-size: 20px;
+  line-height: 30px;
+  margin: 10px 0;
 }
 
 /* Playing Field margins per line*/
@@ -601,15 +602,7 @@ svg {
 }
 
 /* Media Queries */
-@media (max-width: 1150px) {
-  section:nth-of-type(1) .side-bar{
-    width: 35%;
-  }
-
-  section:nth-of-type(1) .title{
-    width: 65%;
-  }
-
+@media (max-width: 1244px) {
   section:nth-of-type(2) .side-bar{
     position: absolute;
     display: none;
@@ -651,6 +644,58 @@ svg {
     font-family: 'Special Elite', cursive;
     font-size: 22px;
   }
+}
+
+@media (max-width: 1150px) {
+  section:nth-of-type(1) .side-bar{
+    width: 35%;
+  }
+
+  section:nth-of-type(1) .title{
+    width: 65%;
+  }
+
+  /*section:nth-of-type(2) .side-bar{
+    position: absolute;
+    display: none;
+    width: 400px;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .side-bar-button {
+    width: 8%;
+    background: rgb(37, 37, 37);
+    border-right: 1px solid #fff;
+    padding-top: 30px;
+  }
+
+  .menu {
+    display: block;
+  }
+
+  .side-bar-button span {
+    display: block;
+    color: #FFF;
+    text-align: center;
+    line-height: 50px;
+    font-size: 30px;
+    font-family: 'Special Elite', cursive;
+  }
+
+  section .cards{
+    width: 92%;
+  }
+
+  .back {
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    cursor: pointer;
+    font-family: 'Special Elite', cursive;
+    font-size: 22px;
+  }*/
 }
 
 @media (max-width: 878px) {

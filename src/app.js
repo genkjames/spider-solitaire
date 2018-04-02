@@ -4,15 +4,15 @@ $(document).ready(function() {
   const ranks = ['K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'A'];
 
   class Moves {
-    constructor(element, lastPlace, hideLastCard, hide) {
+    constructor(element, lastPlace, hideLC, hide) {
       this.element = element;
       this.lastPlace = lastPlace;
-      this.hideLastCard = hideLastCard;
+      this.hideLastCard = hideLC;
       this.hide = hide;
     }
-
     addToArray(newClass) {
-      moveHistory.push(this);
+      // moveHistory.push(this);
+      moveHistory.push(newClass);
     }
   }
 
@@ -30,9 +30,8 @@ $(document).ready(function() {
     const tops = [40, 200, 120, 190, 310, 342, 446, 696, 624, 141, 332, 497, 181, 385, 497, 374, 432, 268, 624, 490, 629, 24, 45, 615, 600, 19, 51, 266];
     const lefts = [80, 54, 190, 350, 165, 675, 174, 397, 574, 630, 352, 331, 827, 865, 569, 476, 44, 528, 743, 774, 197, 356, 522, 23, 935, 741, 931, 930];
     const degrees = [40, 60, 20, 80, 330, 80, 50, 80, 300, 150, 20, 10, 40, 280, 320, 350, 320, 40, 80, 133, 120, -50, 40, 40, 50, 109, 146, 97];
-
-    for(let i = 0; i < tops.length; i += 1) {
-      const titleCard = $(`<div class="card"></div>`);
+    for (let i = 0; i < tops.length; i += 1) {
+      const titleCard = $(`<div class='card'></div>`);
       const rank = $(`<p class="${randomSymbol()}">${randomLetter()}</p>`);
       titleCard.append(rank);
       titleCard.append(rank.clone());
@@ -48,7 +47,6 @@ $(document).ready(function() {
   function makeDeck(suitName, numOfSets) {
     const deck = [];
     let val = ranks.length;
-
     for (let i = 0; i < ranks.length; i += 1) {
       for (let j = 0; j < numOfSets; j += 1) {
         deck.push({ suit: suitName, rank: ranks[i], value: val });
@@ -60,13 +58,11 @@ $(document).ready(function() {
 
   function shuffle(deck) {
     const shuffledDeck = [];
-
     while (deck.length > 0) {
       const cardNum = Math.round(Math.random() * (deck.length - 1));
       shuffledDeck.push(deck[cardNum]);
       deck.splice(cardNum, 1);
     }
-
     return shuffledDeck;
   }
 
@@ -88,15 +84,13 @@ $(document).ready(function() {
       if ($(e.target).hasClass('selected')) {
         $(e.target).removeClass('selected');
         selected.pop();
-      }
-      else if ($(e.target).hasClass('show')) {
+      } else if ($(e.target).hasClass('show')) {
         if (selected.length < 2 && !$(e.target).hasClass('selected')) {
           selected.push($(e.target));
           $(e.target).addClass('selected');
           compareCards();
         }
-      }
-      else if ($(e.target).hasClass('slot')) {
+      } else if ($(e.target).hasClass('slot')) {
         selected.push($(e.target));
         fillEmptySlot();
       }
@@ -106,6 +100,12 @@ $(document).ready(function() {
   function removeClicks() {
     $('.playing-field').off('click');
     $('.deck .slot').off('click');
+  }
+
+  function addToMoveArray(arr1, arr2, hlc, hde) {
+    const moves = new Moves(arr1, arr2, hlc, hde);
+    moves.addToArray();
+    console.log(moves);
   }
 
   function compareCards() {
@@ -121,10 +121,7 @@ $(document).ready(function() {
         if (selected[0].prev().hasClass('show')) {
           hideLastCard = false;
         }
-
-        const moves = new Moves([ppArray], [previousParent], hideLastCard, false);
-        moves.addToArray();
-
+        addToMoveArray([ppArray], [previousParent], hideLastCard, false);
         addAllCards(ppArray, parent);
         showLastCard(previousParent);
       }
@@ -185,10 +182,7 @@ $(document).ready(function() {
         if (selected[0].prev().hasClass('show')) {
           hideLastCard = false;
         }
-
-        const moves = new Moves([pArray], [previousParent], hideLastCard, false);
-        moves.addToArray();
-
+        addToMoveArray([pArray], [previousParent], hideLastCard, false);
         addAllCards(pArray, selected[1]);
         showLastCard(previousParent);
       }
@@ -210,6 +204,7 @@ $(document).ready(function() {
   }
 
   function checkForFullSequence() {
+    console.log('check for full sequence');
     const $kings = $('.playing-field .show[data-value="13"]');
     let kingIndex = 0;
     if ($kings.length > 0) {
@@ -222,8 +217,9 @@ $(document).ready(function() {
             if (status != false) {
               if(status.length === 13) {
                 upDeck++;
-                moveHistory = [];
                 const previousParent = $(status[0]).parent();
+
+                addDeckSequenceToMV(status, previousParent);
                 const winnerSlots = $('.finished-deck-slots .slot');
 
                 for(let k = 0; k < winnerSlots.length; k++) {
@@ -246,13 +242,24 @@ $(document).ready(function() {
     }
   }
 
+  function addDeckSequenceToMV(st, prev) {
+    let prevArray = [];
+    for(let pp = 0; pp < st.length; pp += 1) {
+      prevArray.push(prev);
+    }
+    let lastCd = prev.children().length - 14;
+    let hideLastCard = false;
+    if(prev.children().eq(lastCd).hasClass('cover')) {
+      hideLastCard = true;
+    }
+    addToMoveArray(st, prevArray, hideLastCard, false);
+  }
+
   function isFullSequence(arr, startIndex) {
     if (arr.length - startIndex > 1) {
       let arr2 = [arr[startIndex]];
-
       for (let i = startIndex+1; i < arr.length; i++) {
         const remainder = $(arr[i-1]).data('value') - $(arr[i]).data('value');
-
         if(remainder === 1) {
           arr2.push(arr[i]);
         }
@@ -285,38 +292,33 @@ $(document).ready(function() {
     let n = 1;
     const cardArray = [];
     const placeArray = [];
-
     const addCards = setInterval(function() {
       if(n < numOfCards+1) {
         if(show === n) {
           let frontCard = cards.eq(cards.length-n);
-        frontCard.addClass('show');
-        frontCard.removeClass('cover');
-        frontCard.contents().css('visibility', 'visible');
-        show++;
+          frontCard.addClass('show');
+          frontCard.removeClass('cover');
+          frontCard.contents().css('visibility', 'visible');
+          show++;
         }
-
         playingFields[field].append(cards[cards.length-n]);
         cardArray.push(cards[cards.length-n]);
         placeArray.push($('.deck .slot'));
         field++;
-
         if(field === playingFields.length) {
           field = 0;
           p++;
         }
-
         n++;
       }
       else {
         clearInterval(addCards);
         if(cardArray.length === 7) {
-          let moves = new Moves(cardArray, placeArray, false, true);
-          moves.addToArray();
+          addToMoveArray(cardArray, placeArray, false, true);
         }
+        checkForFullSequence();
       }
     }, 60);
-
   }
 
   function hideLastCard(slot) {
@@ -337,11 +339,10 @@ $(document).ready(function() {
     return score;
   }
 
-  function calculateScore(sc) {
+  function calculateScore(score) {
     const svg = $('svg');
     svg.css('fill', '#ffffff');
     sc = 0;
-
     if (score < 1600) {
       sc = 1;
     } else if (score < 4000) {
@@ -349,7 +350,6 @@ $(document).ready(function() {
     } else {
       sc = 3;
     }
-
     for (let i = 0; i < sc; i += 1) {
       svg.eq(i).css('fill', '#fdff00');
     }
@@ -357,7 +357,7 @@ $(document).ready(function() {
 
   let name = "";
 
-  function isWinner(score) {
+  function isWinner() {
     clearInterval(startTimer);
     $('#pause').off('click');
     const score = gameScore();
@@ -377,14 +377,11 @@ $(document).ready(function() {
   function timer() {
       let $m = parseInt($('#minuteValue').text());
       let $s = parseInt($('#secondValue').text());
-
       if ($s === 0 && $m >= 0) {
         $m -= 1;
         $s = 60;
       }
-
       $s -= 1;
-
       if ($m === 0 && $s === 0) {
         gameScore();
         clearInterval(startTimer);
@@ -392,18 +389,14 @@ $(document).ready(function() {
         removeClicks();
         moveHistory = [];
       }
-
       if($s % 10 === 0) {
         gameScore();
       }
-
       if ($s.toString().length === 1) {
         $s = '0' + $s;
       }
-
       $('#minuteValue').text($m);
       $('#secondValue').text($s);
-
   }
 
   let startTimer;
@@ -457,21 +450,43 @@ $(document).ready(function() {
   $('#undo').on('click', function() {
     if(moveHistory.length > 0) {
       let mv = moveHistory[moveHistory.length-1].element.length;
-      for(let i = mv-1; i >= 0; i--) {
-        const element = moveHistory[moveHistory.length-1].element[i];
-        const slot = moveHistory[moveHistory.length-1].lastPlace[i];
-        if (moveHistory[moveHistory.length-1].hideLastCard === true) {
-          hideLastCard(slot);
+      if(mv === 13) {
+        undoDeckSequence(moveHistory[moveHistory.length-1].element);
+      } else {
+        for(let i = mv-1; i >= 0; i--) {
+          const element = moveHistory[moveHistory.length-1].element[i];
+          const slot = moveHistory[moveHistory.length-1].lastPlace[i];
+          if (moveHistory[moveHistory.length-1].hideLastCard === true) {
+            hideLastCard(slot);
+          }
+          if (moveHistory[moveHistory.length - 1].hide === true) {
+            coverCard($(element));
+          }
+          slot.append(element);
         }
-
-        if (moveHistory[moveHistory.length - 1].hide === true) {
-          coverCard($(element));
-        }
-        slot.append(element);
+        moveHistory.pop();
       }
-      moveHistory.pop();
     }
   });
+
+  function undoDeckSequence(mvel) {
+    const mvLength = mvel.length;
+    for(let i = 0; i < mvLength; i++) {
+      const element = moveHistory[moveHistory.length-1].element[i];
+      const slot = moveHistory[moveHistory.length-1].lastPlace[i];
+      if (moveHistory[moveHistory.length-1].hideLastCard === true) {
+        if(i === 0) {
+          hideLastCard(slot);
+        }
+      }
+      if (moveHistory[moveHistory.length - 1].hide === true) {
+        coverCard($(element));
+      }
+      slot.append(element);
+    }
+    moveHistory.pop();
+    upDeck--;
+  }
 
   $('#reset').on('click', function() {
     $('.card').remove();
@@ -505,7 +520,7 @@ $(document).ready(function() {
   });
 
   $(window).on('resize', function() {
-    if($(this).width() > 1150) {
+    if($(this).width() > 1244) {
       $('.options').css('display', 'block');
     }
     else {
