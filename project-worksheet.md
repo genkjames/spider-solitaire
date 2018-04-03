@@ -26,7 +26,7 @@ The purpose of this game is to make 4 sets of thirteen cards each, with the card
 ## Wireframes
 
 <!-- Include images of your wireframes.  -->
-![wireframe](images/wireframe.jpg);
+![wireframe](images/wireframe.jpg)
 
 ## Priority Matrix
 
@@ -40,7 +40,7 @@ Include a full list of features that have been prioritized based on the `Time an
 | Page Layout | 4 | 6hrs| 
 | Total |  | 20hrs| 
 
-![priority](images/priority.jpg);
+![priority](images/priority.jpg)
 
 ## Game Components
 
@@ -137,8 +137,8 @@ A move object is created and then pushed into the moveHistory array. This keeps 
 ## jQuery Discoveries
  Use this section to list some, but not all, of the jQuery methods and\or functionality discovered while working on this project.
 
- ..* hasClass()
- ..* contents()
+ * hasClass()
+ * contents()
 
 ## Change Log
  Use this section to document what changes were made and the reasoning behind those changes.  
