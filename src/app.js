@@ -455,11 +455,11 @@ $(document).ready(() => {
   function pauseGame() {
     $('#pause').on('click', () => {
       if (pause) {
-        $(this).text('Play');
+        $('#pause').text('Play');
         clearInterval(startTimer);
         removeClicks();
       } else {
-        $(this).text('Pause');
+        $('#pause').text('Pause');
         startTimer = setInterval(timer, 1000);
         clickDeck();
         showClicks();
