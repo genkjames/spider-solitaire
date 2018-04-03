@@ -102,24 +102,51 @@ Time frames are also key in the development cycle.  You have limited time to cod
 Helper functions should be generic enought that they can be reused in other applications. Use this section to document all helper functions that fall into this category.
 
 | Function | Description | 
-| --- | :---: |  
-| Capitalize | This will capitalize the first letter in a string | 
+| --- | :---: |
+| randomNumber(num) | This will generate a random number from 0 to num | 
 
 ## Additional Libraries
  Use this section to list all supporting libraries and thier role in the project. 
 
 ## Code Snippet
 
-Use this section to include a brief code snippet of functionality that you are proud of an a brief description.  
+Use this section to include a brief code snippet of functionality that you are proud of and a brief description. 
+
+```
+  let moveHistory = [];
+
+  class Moves {
+    constructor(element, lastPlace, hideLC, hide) {
+      this.element = element;
+      this.lastPlace = lastPlace;
+      this.hideLastCard = hideLC;
+      this.hide = hide;
+    }
+    addToArray() {
+      moveHistory.push(this);
+    }
+  }
+
+  function addToMoveArray(arr1, arr2, hlc, hde) {
+    const moves = new Moves(arr1, arr2, hlc, hde);
+    moves.addToArray();
+  }
+``` 
+A move object is created and then pushed into the moveHistory array. This keeps track of all moves made in the game, so you can undo one move at a time.
 
 ## jQuery Discoveries
  Use this section to list some, but not all, of the jQuery methods and\or functionality discovered while working on this project.
+
+ ..* hasClass()
+ ..* contents()
 
 ## Change Log
  Use this section to document what changes were made and the reasoning behind those changes.  
 
 ## Issues and Resolutions
  Use this section to list of all major issues encountered and their resolution.
+
+ One issue I had was how long it took to test if my functions worked, i.e, checking for a full set from K to A.
 
 #### SAMPLE.....
 **ERROR**: app.js:34 Uncaught SyntaxError: Unexpected identifier                                
