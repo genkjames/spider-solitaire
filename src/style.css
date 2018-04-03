@@ -52,7 +52,6 @@ body {
 /* Container of the landing page and the game view*/
 .wrapper {
   max-width: 1500px;
-  border: 1px solid gray;
   min-height: 1000px;
   max-height: 1300px;
   margin: 0 auto;
