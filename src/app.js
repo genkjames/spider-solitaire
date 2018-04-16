@@ -109,6 +109,7 @@ $(document).ready(() => {
   function isWinner() {
     clearInterval(startTimer);
     $('#pause').off('click');
+    $('#undo').off('click');
     const score = gameScore();
     calculateScore(score);
     $('#game-status-container').css('display', 'block');
@@ -458,11 +459,13 @@ $(document).ready(() => {
         $('#pause').text('Play');
         clearInterval(startTimer);
         removeClicks();
+        $('#undo').off('click')
       } else {
         $('#pause').text('Pause');
         startTimer = setInterval(timer, 1000);
         clickDeck();
         showClicks();
+        undoButton();
       }
       pause = !pause;
     });
@@ -480,6 +483,7 @@ $(document).ready(() => {
     clickDeck();
     gameScore();
     pauseGame();
+    undoButton();
     setTimeout(() => {
       startTimer = setInterval(timer, 1000);
     }, 1400);
@@ -519,27 +523,29 @@ $(document).ready(() => {
     upDeck -= 1;
   }
 
-  $('#undo').on('click', () => {
-    if (moveHistory.length > 0) {
-      const mv = moveHistory[moveHistory.length - 1].element.length;
-      if (mv === 13) {
-        undoDeckSequence(moveHistory[moveHistory.length - 1].element);
-      } else {
-        for (let i = mv - 1; i >= 0; i -= 1) {
-          const element = moveHistory[moveHistory.length - 1].element[i];
-          const slot = moveHistory[moveHistory.length - 1].lastPlace[i];
-          if (moveHistory[moveHistory.length - 1].hideLastCard === true) {
-            hideLastCard(slot);
+  function undoButton() {
+    $('#undo').on('click', () => {
+      if (moveHistory.length > 0) {
+        const mv = moveHistory[moveHistory.length - 1].element.length;
+        if (mv === 13) {
+          undoDeckSequence(moveHistory[moveHistory.length - 1].element);
+        } else {
+          for (let i = mv - 1; i >= 0; i -= 1) {
+            const element = moveHistory[moveHistory.length - 1].element[i];
+            const slot = moveHistory[moveHistory.length - 1].lastPlace[i];
+            if (moveHistory[moveHistory.length - 1].hideLastCard === true) {
+              hideLastCard(slot);
+            }
+            if (moveHistory[moveHistory.length - 1].hide === true) {
+              coverCard($(element));
+            }
+            slot.append(element);
           }
-          if (moveHistory[moveHistory.length - 1].hide === true) {
-            coverCard($(element));
-          }
-          slot.append(element);
+          moveHistory.pop();
         }
-        moveHistory.pop();
       }
-    }
-  });
+    });
+  }
 
   $('#reset').on('click', () => {
     $('.card').remove();
@@ -547,7 +553,7 @@ $(document).ready(() => {
     upDeck = 0;
     $('#pause').off('click');
     restartTimer();
-    if($('.piece').length > 0) {
+    if ($('.piece').length > 0) {
       $('.piece').remove();
     }
     play();
