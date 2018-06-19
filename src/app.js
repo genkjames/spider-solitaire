@@ -355,10 +355,8 @@ $(document).ready(() => {
     let top = 0;
     let left = 0;
     const maxTop = $(card).height() + 20;
-    console.log(maxTop);
     const initialLeft = $(card).offset().left;
     const maxLeft = $(playingFields[field]).offset().left - initialLeft;
-    console.log(maxLeft);
     const animate = setInterval(() => {
       if (top > maxTop && left > maxLeft) {
         clearInterval(animate);
@@ -366,8 +364,8 @@ $(document).ready(() => {
         $(card).css('left', 0);
         playingFields[field].append(card);
       } else {
-        top += 1;
-        left += 1;
+        top += (maxTop / (200 / 16));
+        left += (maxLeft / (200 / 16));
         $(card).css('top', top);
         $(card).css('left', left);
       }
@@ -393,7 +391,6 @@ $(document).ready(() => {
           show += 1;
         }
         animateDistributionOfCards(cards[cards.length - n], playingFields, field);
-        // playingFields[field].append(cards[cards.length - n]);
         cardArray.push(cards[cards.length - n]);
         placeArray.push($('.deck .slot'));
         field += 1;
@@ -534,7 +531,7 @@ $(document).ready(() => {
     undoButton();
     setTimeout(() => {
       startTimer = setInterval(timer, 1000);
-    }, 6500);
+    }, 6000);
   }
 
   $('#submit').on('click', (e) => {
