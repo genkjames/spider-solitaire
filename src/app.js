@@ -351,6 +351,29 @@ $(document).ready(() => {
     $('.deck .slot').off('click');
   }
 
+  function animateDistributionOfCards(card, playingFields, field) {
+    let top = 0;
+    let left = 0;
+    const maxTop = $(card).height() + 20;
+    console.log(maxTop);
+    const initialLeft = $(card).offset().left;
+    const maxLeft = $(playingFields[field]).offset().left - initialLeft;
+    console.log(maxLeft);
+    const animate = setInterval(() => {
+      if (top > maxTop && left > maxLeft) {
+        clearInterval(animate);
+        $(card).css('top', 0);
+        $(card).css('left', 0);
+        playingFields[field].append(card);
+      } else {
+        top += 1;
+        left += 1;
+        $(card).css('top', top);
+        $(card).css('left', left);
+      }
+    }, 16);
+  }
+
   // Card Distribution
   function distribute(numOfCards) {
     const cards = $('.deck .slot .card');
@@ -369,7 +392,8 @@ $(document).ready(() => {
           frontCard.contents().css('visibility', 'visible');
           show += 1;
         }
-        playingFields[field].append(cards[cards.length - n]);
+        animateDistributionOfCards(cards[cards.length - n], playingFields, field);
+        // playingFields[field].append(cards[cards.length - n]);
         cardArray.push(cards[cards.length - n]);
         placeArray.push($('.deck .slot'));
         field += 1;
@@ -384,7 +408,7 @@ $(document).ready(() => {
         }
         checkForFullSequence();
       }
-    }, 60);
+    }, 200);
   }
 
   function distributeInitialCards() {
@@ -471,6 +495,30 @@ $(document).ready(() => {
     });
   }
 
+  function undoButton() {
+    $('#undo').on('click', () => {
+      if (moveHistory.length > 0) {
+        const mv = moveHistory[moveHistory.length - 1].element.length;
+        if (mv === 13) {
+          undoDeckSequence(moveHistory[moveHistory.length - 1].element);
+        } else {
+          for (let i = mv - 1; i >= 0; i -= 1) {
+            const element = moveHistory[moveHistory.length - 1].element[i];
+            const slot = moveHistory[moveHistory.length - 1].lastPlace[i];
+            if (moveHistory[moveHistory.length - 1].hideLastCard === true) {
+              hideLastCard(slot);
+            }
+            if (moveHistory[moveHistory.length - 1].hide === true) {
+              coverCard($(element));
+            }
+            slot.append(element);
+          }
+          moveHistory.pop();
+        }
+      }
+    });
+  }
+
   function play() {
     let suit = $("[name = 'suit']:checked").val();
     if (suit === undefined) {
@@ -486,7 +534,7 @@ $(document).ready(() => {
     undoButton();
     setTimeout(() => {
       startTimer = setInterval(timer, 1000);
-    }, 1400);
+    }, 6500);
   }
 
   $('#submit').on('click', (e) => {
@@ -521,30 +569,6 @@ $(document).ready(() => {
     }
     moveHistory.pop();
     upDeck -= 1;
-  }
-
-  function undoButton() {
-    $('#undo').on('click', () => {
-      if (moveHistory.length > 0) {
-        const mv = moveHistory[moveHistory.length - 1].element.length;
-        if (mv === 13) {
-          undoDeckSequence(moveHistory[moveHistory.length - 1].element);
-        } else {
-          for (let i = mv - 1; i >= 0; i -= 1) {
-            const element = moveHistory[moveHistory.length - 1].element[i];
-            const slot = moveHistory[moveHistory.length - 1].lastPlace[i];
-            if (moveHistory[moveHistory.length - 1].hideLastCard === true) {
-              hideLastCard(slot);
-            }
-            if (moveHistory[moveHistory.length - 1].hide === true) {
-              coverCard($(element));
-            }
-            slot.append(element);
-          }
-          moveHistory.pop();
-        }
-      }
-    });
   }
 
   $('#reset').on('click', () => {

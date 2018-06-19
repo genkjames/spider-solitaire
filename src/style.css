@@ -315,7 +315,6 @@ button:hover {
 
 /* Playing Cards Game View */
 .top-row {
-
   width: 100%;
   clear: both;
   position: relative;
@@ -494,7 +493,7 @@ svg {
 }
 
 /* Playing Field margins per line*/
-.playing-field .card:nth-of-type(2) {
+/*.playing-field .card:nth-of-type(2) {
   top: 20px;
 }
 
@@ -604,7 +603,7 @@ svg {
 
 .playing-field .card:nth-of-type(29) {
   top: 560px;
-}
+}*/
 
 /* Media Queries */
 @media (max-width: 1244px) {
@@ -659,48 +658,6 @@ svg {
   section:nth-of-type(1) .title{
     width: 65%;
   }
-
-  /*section:nth-of-type(2) .side-bar{
-    position: absolute;
-    display: none;
-    width: 400px;
-    height: 100%;
-    z-index: 1;
-  }
-
-  .side-bar-button {
-    width: 8%;
-    background: rgb(37, 37, 37);
-    border-right: 1px solid #fff;
-    padding-top: 30px;
-  }
-
-  .menu {
-    display: block;
-  }
-
-  .side-bar-button span {
-    display: block;
-    color: #FFF;
-    text-align: center;
-    line-height: 50px;
-    font-size: 30px;
-    font-family: 'Special Elite', cursive;
-  }
-
-  section .cards{
-    width: 92%;
-  }
-
-  .back {
-    display: block;
-    position: absolute;
-    right: 10px;
-    top: 15px;
-    cursor: pointer;
-    font-family: 'Special Elite', cursive;
-    font-size: 22px;
-  }*/
 }
 
 @media (max-width: 878px) {
