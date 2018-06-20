@@ -512,6 +512,25 @@ $(document).ready(() => {
     });
   }
 
+  function undoDeckSequence(mvel) {
+    const mvLength = mvel.length;
+    for (let i = 0; i < mvLength; i += 1) {
+      const element = moveHistory[moveHistory.length - 1].element[i];
+      const slot = moveHistory[moveHistory.length - 1].lastPlace[i];
+      if (moveHistory[moveHistory.length - 1].hideLastCard === true) {
+        if (i === 0) {
+          hideLastCard(slot);
+        }
+      }
+      if (moveHistory[moveHistory.length - 1].hide === true) {
+        coverCard($(element));
+      }
+      slot.append(element);
+    }
+    moveHistory.pop();
+    upDeck -= 1;
+  }
+
   function undoButton() {
     $('#undo').on('click', () => {
       if (moveHistory.length > 0) {
@@ -522,6 +541,12 @@ $(document).ready(() => {
           for (let i = mv - 1; i >= 0; i -= 1) {
             const element = moveHistory[moveHistory.length - 1].element[i];
             const slot = moveHistory[moveHistory.length - 1].lastPlace[i];
+
+            const cardLevel = calculateCardLevel(slot.index() + 1);
+            for (let j = 0; j < element.length; j += 1) {
+              element[j].css('top', (cardLevel + j) * 20);
+            }
+
             if (moveHistory[moveHistory.length - 1].hideLastCard === true) {
               hideLastCard(slot);
             }
@@ -568,25 +593,6 @@ $(document).ready(() => {
     }, 2000);
     setTimeout(play, 1500);
   });
-
-  function undoDeckSequence(mvel) {
-    const mvLength = mvel.length;
-    for (let i = 0; i < mvLength; i += 1) {
-      const element = moveHistory[moveHistory.length - 1].element[i];
-      const slot = moveHistory[moveHistory.length - 1].lastPlace[i];
-      if (moveHistory[moveHistory.length - 1].hideLastCard === true) {
-        if (i === 0) {
-          hideLastCard(slot);
-        }
-      }
-      if (moveHistory[moveHistory.length - 1].hide === true) {
-        coverCard($(element));
-      }
-      slot.append(element);
-    }
-    moveHistory.pop();
-    upDeck -= 1;
-  }
 
   $('#reset').on('click', () => {
     $('.card').remove();
