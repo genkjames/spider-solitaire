@@ -209,6 +209,7 @@ $(document).ready(() => {
       parent.append(selected[0]);
     } else {
       for (let i = 0; i < ppArray.length; i += 1) {
+        ppArray[i].css('top', (initialCardLevel + i) * 20);
         parent.append(ppArray[i]);
       }
     }
