@@ -352,22 +352,25 @@ $(document).ready(() => {
   }
 
   function animateDistributionOfCards(card, playingFields, field) {
+    const cards = $('.playing-field .card');
     let top = 0;
     let left = 0;
-    const maxTop = $(card).height() + 20;
+    const cardLevel = Math.floor((cards.length + 1) / playingFields.length);
+    const maxTop = $(card).height() + 20 + (20 * cardLevel);
     const initialLeft = $(card).offset().left;
     const maxLeft = $(playingFields[field]).offset().left - initialLeft;
+    // debugger;
     const animate = setInterval(() => {
       if (top > maxTop && left > maxLeft) {
         clearInterval(animate);
-        $(card).css('top', 0);
+        $(card).css('top', cardLevel * 20);
         $(card).css('left', 0);
         playingFields[field].append(card);
       } else {
-        top += (maxTop / (200 / 16));
-        left += (maxLeft / (200 / 16));
-        $(card).css('top', top);
-        $(card).css('left', left);
+        top += (maxTop / (190 / 16));
+        left += (maxLeft / (190 / 16));
+        $(card).css('top', top + 'px');
+        $(card).css('left', left + 'px');
       }
     }, 16);
   }
