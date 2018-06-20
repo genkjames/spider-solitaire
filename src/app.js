@@ -542,9 +542,13 @@ $(document).ready(() => {
             const element = moveHistory[moveHistory.length - 1].element[i];
             const slot = moveHistory[moveHistory.length - 1].lastPlace[i];
 
-            const cardLevel = calculateCardLevel(slot.index() + 1);
-            for (let j = 0; j < element.length; j += 1) {
-              element[j].css('top', (cardLevel + j) * 20);
+            if(slot.parent().hasClass('pl-slots')) {
+              const cardLevel = calculateCardLevel(slot.index() + 1);
+              for (let j = 0; j < element.length; j += 1) {
+                element[j].css('top', (cardLevel + j) * 20);
+              }
+            } else {
+              $(element).css('top', 0);
             }
 
             if (moveHistory[moveHistory.length - 1].hideLastCard === true) {
