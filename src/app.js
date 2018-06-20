@@ -173,12 +173,10 @@ $(document).ready(() => {
   }
 
   function getLastCard() {
-    // debugger;
     return selected[1].parent().children().last();
   }
 
   function getAllCards(start) {
-    // debugger;
     let indexOfCardChosen = 0;
     for (let i = 0; i < start.children().length; i += 1) {
       if (start.children().eq(i).hasClass('selected')) {
@@ -203,7 +201,6 @@ $(document).ready(() => {
   function addAllCards(ppArray, parent) {
     const slotNumber = parent.index() + 1;
     const initialCardLevel = calculateCardLevel(slotNumber);
-    // debugger;
     if (ppArray.length === 1) {
       selected[0].css('top', initialCardLevel * 20);
       parent.append(selected[0]);
@@ -216,7 +213,6 @@ $(document).ready(() => {
   }
 
   function emptySelectedArray() {
-    // debugger;
     for (let i = 0; i < selected.length; i += 1) {
       selected[i].removeClass('selected');
     }
@@ -224,14 +220,12 @@ $(document).ready(() => {
   }
 
   function showLastCard(container) {
-    // debugger;
     container.children().last().removeClass('cover').addClass('show')
       .contents()
       .css('visibility', 'visible');
   }
 
   function addDeckSequenceToMV(st, prev) {
-    // debugger;
     const prevArray = [];
     for (let pp = 0; pp < st.length; pp += 1) {
       prevArray.push(prev);
@@ -280,6 +274,7 @@ $(document).ready(() => {
                 for (let k = 0; k < winnerSlots.length; k += 1) {
                   if (winnerSlots.eq(k).children().length === 0) {
                     for (let l = status.length - 1; l >= 0; l -= 1) {
+                      $(status[l]).css('top', 0);
                       winnerSlots.eq(k).append(status[l]);
                     }
                     showLastCard(previousParent);
@@ -299,7 +294,6 @@ $(document).ready(() => {
 
   // compares the value of the cards
   function compareCards() {
-    // debugger;
     if (selected.length === 2) {
       const lastCard = getLastCard();
       const remainder = lastCard.data('value') - selected[0].data('value');
@@ -322,7 +316,6 @@ $(document).ready(() => {
   }
 
   function fillEmptySlot() {
-    // debugger;
     if (selected.length === 2) {
       if (selected[1].hasClass('slot')) {
         const previousParent = selected[0].parent();
@@ -375,7 +368,6 @@ $(document).ready(() => {
     const maxTop = $(card).height() + 20 + (20 * cardLevel);
     const initialLeft = $(card).offset().left;
     const maxLeft = $(playingFields[field]).offset().left - initialLeft;
-    // debugger;
     const animate = setInterval(() => {
       if (top > maxTop && left > maxLeft) {
         clearInterval(animate);
@@ -517,6 +509,10 @@ $(document).ready(() => {
     for (let i = 0; i < mvLength; i += 1) {
       const element = moveHistory[moveHistory.length - 1].element[i];
       const slot = moveHistory[moveHistory.length - 1].lastPlace[i];
+
+      const cardLevel = calculateCardLevel(slot.index() + 1);
+      $(element).css('top', cardLevel * 20);
+
       if (moveHistory[moveHistory.length - 1].hideLastCard === true) {
         if (i === 0) {
           hideLastCard(slot);
@@ -542,7 +538,7 @@ $(document).ready(() => {
             const element = moveHistory[moveHistory.length - 1].element[i];
             const slot = moveHistory[moveHistory.length - 1].lastPlace[i];
 
-            if(slot.parent().hasClass('pl-slots')) {
+            if (slot.parent().hasClass('pl-slots')) {
               const cardLevel = calculateCardLevel(slot.index() + 1);
               for (let j = 0; j < element.length; j += 1) {
                 element[j].css('top', (cardLevel + j) * 20);
