@@ -10,43 +10,6 @@ body {
   width: 100%;
 }
 
-/* Copy of the body to give a background to the whole page */
-.body-copy {
-  position: absolute;
-  width: 100vw;
-  display: flex;
-}
-
-.body-copy .half{
-  width: 50%;
-  z-index: -1;
-}
-
-.half:nth-of-type(1) {
-  background: rgba(37, 37, 37);
-}
-
-.half:nth-of-type(2) {
-  background: linear-gradient(rgb(0, 128, 0), rgb(0, 100, 0));
-}
-
-.body-copy .body-cover {
-  width: 50%;
-  height: 100%;
-  position: absolute;
-  overflow: hidden;
-  background: rgba(0, 0, 0, .5);
-  z-index: 2;
-}
-
-.half:nth-of-type(1) .body-cover {
-  background: rgb(37, 37, 37);
-}
-
-.half:nth-of-type(2) .body-cover {
-  background: rgba(0, 0, 0, .5);
-}
-
 /* Container of the landing page and the game view*/
 .wrapper {
   min-height: 700px;
@@ -54,6 +17,18 @@ body {
   margin: 0 auto;
   position: relative;
   z-index: 3;
+}
+
+section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  width: 100%;
+  min-height: 1000px;
+  height: 100vh;
+  background: linear-gradient(green, darkgreen);
+  overflow: scroll;
 }
 
 h1,
@@ -70,75 +45,46 @@ h3 {
 
 section h1 {
   font-size: 60px;
-  margin-top: 80px;
+  margin: 40px 10px 20px;
   text-align: center;
   color: #f3f3f3;
   line-height: 60px;
   text-transform: uppercase;
 }
 
-h1::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 180px;
-  margin-bottom: 40px;
-  background: url('../images/web.svg') no-repeat center;
-  background-size: contain;
+.landing-page {
+  position: relative;
+  height: 100%;
+  z-index: 2;
+}
+
+.game-page {
+  z-index: 1;
 }
 
 /* Landing page view title */
 .title {
-  position: relative;
-}
-
-.title > div:nth-of-type(1) {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, .5);
-  z-index: 1;
 }
 
-.title > div:nth-of-type(2){
+.title > div {
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   margin: 0 auto;
-  overflow-x: scroll;
   padding-top: 15px;
   overflow: hidden;
-}
-
-section {
-  padding: 20px;
-  width: 100%;
-  min-height: 600px;
-  height: 100vh;
-  background: linear-gradient(green, darkgreen);
-  overflow: scroll;
 }
 
 @keyframes fade {
   to {
     opacity: 0;
   }
-}
-
-.landing-page {
-  height: 100%;
-  z-index: 2;
-}
-
-.game-page {
-  min-height: 1200px;
-  z-index: 1;
-}
-
-.title,
-.cards {
-  position: relative;
 }
 
 /* Side Bar */
