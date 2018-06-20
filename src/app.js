@@ -173,10 +173,12 @@ $(document).ready(() => {
   }
 
   function getLastCard() {
+    // debugger;
     return selected[1].parent().children().last();
   }
 
   function getAllCards(start) {
+    // debugger;
     let indexOfCardChosen = 0;
     for (let i = 0; i < start.children().length; i += 1) {
       if (start.children().eq(i).hasClass('selected')) {
@@ -199,7 +201,11 @@ $(document).ready(() => {
   }
 
   function addAllCards(ppArray, parent) {
+    const slotNumber = parent.index() + 1;
+    const initialCardLevel = calculateCardLevel(slotNumber);
+    // debugger;
     if (ppArray.length === 1) {
+      selected[0].css('top', initialCardLevel * 20);
       parent.append(selected[0]);
     } else {
       for (let i = 0; i < ppArray.length; i += 1) {
@@ -209,6 +215,7 @@ $(document).ready(() => {
   }
 
   function emptySelectedArray() {
+    // debugger;
     for (let i = 0; i < selected.length; i += 1) {
       selected[i].removeClass('selected');
     }
@@ -216,12 +223,14 @@ $(document).ready(() => {
   }
 
   function showLastCard(container) {
+    // debugger;
     container.children().last().removeClass('cover').addClass('show')
       .contents()
       .css('visibility', 'visible');
   }
 
   function addDeckSequenceToMV(st, prev) {
+    // debugger;
     const prevArray = [];
     for (let pp = 0; pp < st.length; pp += 1) {
       prevArray.push(prev);
@@ -289,6 +298,7 @@ $(document).ready(() => {
 
   // compares the value of the cards
   function compareCards() {
+    // debugger;
     if (selected.length === 2) {
       const lastCard = getLastCard();
       const remainder = lastCard.data('value') - selected[0].data('value');
@@ -311,6 +321,7 @@ $(document).ready(() => {
   }
 
   function fillEmptySlot() {
+    // debugger;
     if (selected.length === 2) {
       if (selected[1].hasClass('slot')) {
         const previousParent = selected[0].parent();
@@ -351,11 +362,15 @@ $(document).ready(() => {
     $('.deck .slot').off('click');
   }
 
+  function calculateCardLevel(slotNum) {
+    const slot = $(`.playing-field .slot:nth-of-type(${slotNum})`);
+    return slot.children().length;
+  }
+
   function animateDistributionOfCards(card, playingFields, field) {
-    const cards = $('.playing-field .card');
+    const cardLevel = calculateCardLevel(field + 1);
     let top = 0;
     let left = 0;
-    const cardLevel = Math.floor((cards.length + 1) / playingFields.length);
     const maxTop = $(card).height() + 20 + (20 * cardLevel);
     const initialLeft = $(card).offset().left;
     const maxLeft = $(playingFields[field]).offset().left - initialLeft;
@@ -369,8 +384,8 @@ $(document).ready(() => {
       } else {
         top += (maxTop / (190 / 16));
         left += (maxLeft / (190 / 16));
-        $(card).css('top', top + 'px');
-        $(card).css('left', left + 'px');
+        $(card).css('top', top);
+        $(card).css('left', left);
       }
     }, 16);
   }
@@ -378,6 +393,7 @@ $(document).ready(() => {
   // Card Distribution
   function distribute(numOfCards) {
     const cards = $('.deck .slot .card');
+    const playingCards = $('.playing-field .card');
     const playingFields = $('.playing-field .slot');
     let field = 0;
     let show = (numOfCards - playingFields.length) + 1;
