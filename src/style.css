@@ -14,8 +14,6 @@ body {
 .body-copy {
   position: absolute;
   width: 100vw;
-  min-height: 1000px;
-  max-height: 1300px;
   display: flex;
 }
 
@@ -51,9 +49,8 @@ body {
 
 /* Container of the landing page and the game view*/
 .wrapper {
-  max-width: 1500px;
-  min-height: 1000px;
-  max-height: 1300px;
+  min-height: 700px;
+  height: 100vh;
   margin: 0 auto;
   position: relative;
   z-index: 3;
@@ -115,15 +112,12 @@ h1::before {
 }
 
 section {
+  padding: 20px;
   width: 100%;
-  min-height: inherit;
-  max-height: inherit;
+  min-height: 600px;
+  height: 100vh;
   background: linear-gradient(green, darkgreen);
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 @keyframes fade {
@@ -133,27 +127,34 @@ section {
 }
 
 .landing-page {
+  height: 100%;
   z-index: 2;
 }
 
 .game-page {
+  min-height: 1200px;
   z-index: 1;
 }
 
 .title,
 .cards {
-  width: 70%;
   position: relative;
 }
 
 /* Side Bar */
 .side-bar {
-  padding: 30px;
-  width: 30%;
+  display: flex;
+  max-width: 1000px;
+  margin: 0 auto;
   border-right: 1px solid #fff;
   position: relative;
   color: #fff;
-  background: rgb(37, 37, 37);
+  background: rgba(37, 37, 37, .6);
+}
+
+.side-bar > * {
+  flex-basis: 50%;
+  padding: 30px;
 }
 
 .back, .menu {
@@ -170,7 +171,7 @@ h2::after {
   display: block;
   width: 100%;
   height: 30px;
-  background: url('../images/web.svg') center;
+  background: url('../images/web.svg');
   background-size: contain;
 }
 
@@ -262,13 +263,9 @@ label {
   padding: 8px 8px 8px 38px;
 }
 
-/* Cards container */
-.cards {
-  padding: 15px 35px;
-}
-
 /* Game Score and timer */
 .scoring-status {
+  padding: 20px 10px 10px;
   width: 100%;
 }
 
@@ -289,12 +286,10 @@ label {
 }
 
 /* Game Buttons */
+
 .game-buttons button {
   display: inline-block;
-}
-
-.game-buttons button:nth-of-type(2) {
-  margin: 0 10px;
+  margin: 10px;
 }
 
 button {
@@ -316,23 +311,17 @@ button:hover {
 /* Playing Cards Game View */
 .top-row {
   width: 100%;
-  clear: both;
+  display: flex;
+  justify-content: space-between;
   position: relative;
-}
-
-.deck {
-  display: inline-block;
 }
 
 .deck .slot {
   position: relative;
-
 }
 
 .finished-deck-slots {
-  display: inline-block;
-  position: absolute;
-  right: 0;
+  display: flex;
 }
 
 /* Playing Field View */
@@ -341,16 +330,16 @@ button:hover {
 }
 
 .pl-slots {
-  position: absolute;
-  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 50px;
 }
 
 .slot {
-  display: inline-block;
   position: relative;
   width: 90px;
   height: 120px;
-  margin: 10px 0px 10px 10px;
+  margin: 10px;
   border-radius: 5px;
   background: rgba(255, 255, 255, .5);
 }
