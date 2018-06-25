@@ -12,7 +12,6 @@ body {
 
 /* Container of the landing page and the game view*/
 .wrapper {
-  min-height: 700px;
   height: 100vh;
   margin: 0 auto;
   position: relative;
@@ -25,9 +24,10 @@ section {
   left: 0;
   padding: 20px;
   width: 100%;
-  min-height: 1000px;
   height: 100vh;
-  background: linear-gradient(green, darkgreen);
+  /*background: linear-gradient(green, darkgreen);
+  background: linear-gradient(rgb(0, 182, 28), rgb(81, 196, 66));
+  background: #6DB556;*/
   overflow: scroll;
 }
 
@@ -54,12 +54,15 @@ section h1 {
 
 .landing-page {
   position: relative;
+  padding: 70px 0 0 0;
   height: 100%;
   z-index: 2;
+  background: rgb(37, 37, 37, .6);
 }
 
 .game-page {
   z-index: 1;
+  background: linear-gradient(green, darkgreen)
 }
 
 /* Landing page view title */
@@ -89,18 +92,11 @@ section h1 {
 
 /* Side Bar */
 .side-bar {
-  display: flex;
+  padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
-  border-right: 1px solid #fff;
   position: relative;
   color: #fff;
-  background: rgba(37, 37, 37, .6);
-}
-
-.side-bar > * {
-  flex-basis: 50%;
-  padding: 30px;
 }
 
 .back, .menu {
@@ -115,7 +111,7 @@ h2 {
 h2::after {
   content: "";
   display: block;
-  width: 100%;
+  width: 120px;
   height: 30px;
   background: url('../images/web.svg');
   background-size: contain;
@@ -211,24 +207,18 @@ label {
 
 /* Game Score and timer */
 .scoring-status {
-  padding: 20px 10px 10px;
+  padding: 0 10px 10px;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.scoring-status > p {
+.scoring-status p {
   display: inline-block;
-  width: 49%;
+  padding: 0 0 0 20px;
   font-size: 24px;
   color: white;
-}
-
-.scoring-status > p:nth-of-type(2) {
-  float: left;
-}
-
-.scoring-status > p:nth-of-type(2) {
-  float: right;
-  text-align: right;
 }
 
 /* Game Buttons */
@@ -278,7 +268,6 @@ button:hover {
 .pl-slots {
   display: flex;
   justify-content: flex-end;
-  padding-bottom: 50px;
 }
 
 .slot {
@@ -288,6 +277,10 @@ button:hover {
   margin: 10px;
   border-radius: 5px;
   background: rgba(255, 255, 255, .5);
+}
+
+.pl-slots .slot .card:last-child {
+  margin-bottom: 50px;
 }
 
 .finished-deck-slots .slot {

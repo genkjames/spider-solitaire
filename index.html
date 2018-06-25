@@ -16,10 +16,6 @@
   <div class="wrapper">
     <!-- Landing View -->
     <section id="landing" class="landing-page">
-      <h1>Spider Solitaire</h1>
-      <div class="title">
-        <div id="title-cards"></div>
-      </div>
       <div class="side-bar">
         <!-- Rules -->
         <div class="rules">
@@ -56,19 +52,20 @@
     </section>
     <!-- Game View -->
     <section class="game-page">
-      <!-- Game Buttons -->
-      <div class="game-buttons">
-        <button id="pause">Pause</button>
-        <button id="reset">Reset</button>
-        <button id="undo">Undo</button>
-        <button id="rules">Rules</button>
-      </div>
-
       <!-- Cards -->
       <div class="cards">
         <div class="scoring-status">
-          <p>Game Score: <span id="score"></span></p>
-          <p><span id="minuteValue">8</span> : <span id="secondValue">00</span></p>
+          <!-- Game Buttons -->
+          <div class="game-buttons">
+            <button id="pause">Pause</button>
+            <button id="reset">Reset</button>
+            <button id="undo">Undo</button>
+            <button id="rules">Rules</button>
+          </div>
+          <div>
+            <p>Game Score: <span id="score"></span></p>
+            <p><span id="minuteValue">8</span> : <span id="secondValue">00</span></p>
+          </div>
         </div>
         <div class="top-row">
           <div class="deck">
