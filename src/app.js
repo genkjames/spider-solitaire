@@ -121,7 +121,7 @@ $(document).ready(() => {
         clearInterval(startConfetti);
       }
     }, 200);
-    setTimeout(function() {
+    setTimeout(() => {
       $('.piece').remove();
     }, 7000);
   }
@@ -569,6 +569,12 @@ $(document).ready(() => {
     });
   }
 
+  function rulesButton() {
+    $('#rules').on('click', () => {
+      console.log('display rules');
+    });
+  }
+
   function play() {
     let suit = $("[name = 'suit']:checked").val();
     if (suit === undefined) {
@@ -578,11 +584,12 @@ $(document).ready(() => {
     const finalDeck = shuffle(makeDeck(suit, 5));
     viewDeck(finalDeck);
     distributeInitialCards();
-    clickDeck();
-    gameScore();
-    pauseGame();
-    undoButton();
     setTimeout(() => {
+      clickDeck();
+      gameScore();
+      pauseGame();
+      undoButton();
+      rulesButton();
       startTimer = setInterval(timer, 1000);
     }, 6000);
   }
