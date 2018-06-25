@@ -119,11 +119,11 @@ $(document).ready(() => {
       goConfetti += 1;
       if (goConfetti === 5) {
         clearInterval(startConfetti);
-        setTimeout(function() {
-          $('.piece').remove();
-        }, 6000);
       }
     }, 200);
+    setTimeout(function() {
+      $('.piece').remove();
+    }, 7000);
   }
 
   function loss() {
@@ -459,7 +459,7 @@ $(document).ready(() => {
       $s = 60;
     }
     $s -= 1;
-    if ($m === 7 && $s === 55) {
+    if ($m === 0 && $s === 0) {
       gameScore();
       clearInterval(startTimer);
       loss();

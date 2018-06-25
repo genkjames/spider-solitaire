@@ -402,8 +402,7 @@ svg {
 
 @keyframes drop {
   to {
-    top: 100%;
-    opacity: 0;
+    top: 105%;
   }
 }
 
