@@ -584,9 +584,9 @@ $(document).ready(() => {
     const finalDeck = shuffle(makeDeck(suit, 5));
     viewDeck(finalDeck);
     distributeInitialCards();
+    gameScore();
     setTimeout(() => {
       clickDeck();
-      gameScore();
       pauseGame();
       undoButton();
       rulesButton();
