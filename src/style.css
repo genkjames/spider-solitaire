@@ -25,9 +25,6 @@ section {
   padding: 20px;
   width: 100%;
   height: 100vh;
-  /*background: linear-gradient(green, darkgreen);
-  background: linear-gradient(rgb(0, 182, 28), rgb(81, 196, 66));
-  background: #6DB556;*/
   overflow: scroll;
 }
 
@@ -40,7 +37,7 @@ h3 {
 
 h2,
 h3 {
-  color: #008000;
+  color: #B9E9AD;
 }
 
 section h1 {
@@ -57,31 +54,12 @@ section h1 {
   padding: 70px 0 0 0;
   height: 100%;
   z-index: 2;
-  background: rgb(37, 37, 37, .6);
+  background: rgb(128, 128, 128, .7);
 }
 
 .game-page {
   z-index: 1;
   background: linear-gradient(green, darkgreen)
-}
-
-/* Landing page view title */
-.title {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.title > div {
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  margin: 0 auto;
-  padding-top: 15px;
-  overflow: hidden;
 }
 
 @keyframes fade {
@@ -92,10 +70,9 @@ section h1 {
 
 /* Side Bar */
 .side-bar {
-  padding: 20px;
+  padding: 20px 50px;
   max-width: 1000px;
   margin: 0 auto;
-  position: relative;
   color: #fff;
 }
 
@@ -138,7 +115,6 @@ h2::after {
 
 /* Form Container */
 .form-container {
-  padding: 15px;
   font-size: 20px;
 }
 
@@ -215,10 +191,12 @@ label {
 }
 
 .scoring-status p {
-  display: inline-block;
-  padding: 0 0 0 20px;
-  font-size: 24px;
+  font-size: 20px;
   color: white;
+}
+
+#score {
+  padding: 0 20px 0 0;
 }
 
 /* Game Buttons */
@@ -274,7 +252,7 @@ button:hover {
   position: relative;
   width: 90px;
   height: 120px;
-  margin: 10px;
+  margin: 10px 5px;
   border-radius: 5px;
   background: rgba(255, 255, 255, .5);
 }
@@ -290,8 +268,8 @@ button:hover {
 /* Cards View */
 .card {
   position: absolute;
-  width: 90px;
-  height: 120px;
+  width: inherit;
+  height: inherit;
   border-radius: inherit;
   border: 1px solid gray;
   top: 0;
@@ -308,7 +286,7 @@ button:hover {
 
 .card p {
   position: absolute;
-  font-size: 16px;
+  font-size: 12px;
   padding: 3px;
   text-align: center;
   font-weight: 600;
@@ -334,8 +312,8 @@ button:hover {
 .diamond::after {
   content: "";
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 10px;
+  height: 10px;
   background: url('../images/diamond.png') center no-repeat;
   background-size: contain;
 }
@@ -343,8 +321,8 @@ button:hover {
 .heart::after {
   content: "";
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 10px;
+  height: 10px;
   background: url('../images/heart.png') center no-repeat;
   background-size: contain;
 }
@@ -352,8 +330,8 @@ button:hover {
 .clover::after {
   content: "";
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 10px;
+  height: 10px;
   background: url('../images/clover.png') center no-repeat;
   background-size: contain;
 }
@@ -361,8 +339,8 @@ button:hover {
 .spade::after {
   content: "";
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 10px;
+  height: 10px;
   background: url('../images/spade.png') center no-repeat;
   background-size: contain;
 }
@@ -422,14 +400,6 @@ svg {
 
 /* Media Queries */
 @media (max-width: 1244px) {
-  section:nth-of-type(2) .side-bar{
-    position: absolute;
-    display: none;
-    width: 400px;
-    height: 100%;
-    z-index: 1;
-  }
-
   .side-bar-button {
     width: 8%;
     background: rgb(37, 37, 37);
@@ -450,10 +420,6 @@ svg {
     font-family: 'Special Elite', cursive;
   }
 
-  section .cards{
-    width: 92%;
-  }
-
   .back {
     display: block;
     position: absolute;
@@ -465,35 +431,21 @@ svg {
   }
 }
 
-@media (max-width: 1150px) {
-  section:nth-of-type(1) .side-bar{
-    width: 35%;
+@media (max-width: 1000px) {
+  .scoring-status {
+    flex-direction: column;
   }
 
-  section:nth-of-type(1) .title{
-    width: 65%;
+  .game-buttons {
+    margin-bottom: 10px;
   }
 }
 
-@media (max-width: 878px) {
+@media (max-width: 758px) {
   .slot {
     width: 70px;
     height: 90px;
-  }
-
-  .cards .card {
-    width: 70px;
-    height: 90px;
-  }
-}
-
-@media (max-width: 850px) {
-  section:nth-of-type(1) .side-bar{
-    width: 40%;
-  }
-
-  section:nth-of-type(1) .title{
-    width: 60%;
+    margin: 10px 3px;
   }
 }
 
@@ -501,34 +453,55 @@ svg {
   section h1 {
     font-size: 45px;
   }
-
-  section:nth-of-type(1) .side-bar{
-    width: 45%;
-  }
-
-  section:nth-of-type(1) .title{
-    width: 55%;
-  }
 }
 
-@media (max-width: 738px) {
+@media (max-width: 590px) {
   .slot {
     width: 55px;
     height: 75px;
   }
 
-  .cards .card {
-    width: 55px;
-    height: 75px;
+  .game-page {
+    padding: 20px 5px;
   }
 }
 
-@media (max-width: 605px) {
-  section:nth-of-type(1) .side-bar{
-    width: 50%;
+@media (max-width: 680px) {
+  .landing-page {
+    padding: 20px 0 0 0;
   }
 
-  section:nth-of-type(1) .title{
-    width: 50%;
+  .side-bar {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 550px) {
+  .game-buttons button {
+    margin: 3px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 452px) {
+  .slot {
+    width: 35px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 460px) {
+  .landing-page {
+    padding: 10px 0 0 0;
+  }
+
+  .side-bar {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 350px) {
+  .game-buttons button {
+    font-size: 12px;
   }
 }

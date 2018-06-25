@@ -202,11 +202,11 @@ $(document).ready(() => {
     const slotNumber = parent.index() + 1;
     const initialCardLevel = calculateCardLevel(slotNumber);
     if (ppArray.length === 1) {
-      selected[0].css('top', initialCardLevel * 20);
+      selected[0].css('top', marginLevel(initialCardLevel));
       parent.append(selected[0]);
     } else {
       for (let i = 0; i < ppArray.length; i += 1) {
-        ppArray[i].css('top', (initialCardLevel + i) * 20);
+        ppArray[i].css('top', marginLevel(initialCardLevel + i));
         parent.append(ppArray[i]);
       }
     }
@@ -361,17 +361,22 @@ $(document).ready(() => {
     return slot.children().length;
   }
 
+  function marginLevel(num) {
+    return num * 16;
+  }
+
   function animateDistributionOfCards(card, playingFields, field) {
     const cardLevel = calculateCardLevel(field + 1);
     let top = 0;
     let left = 0;
-    const maxTop = $(card).height() + 20 + (20 * cardLevel);
+    const initialTop = $(card).offset().top;
+    const maxTop = initialTop + marginLevel(cardLevel);
     const initialLeft = $(card).offset().left;
     const maxLeft = $(playingFields[field]).offset().left - initialLeft;
     const animate = setInterval(() => {
       if (top > maxTop && left > maxLeft) {
         clearInterval(animate);
-        $(card).css('top', cardLevel * 20);
+        $(card).css('top', marginLevel(cardLevel));
         $(card).css('left', 0);
         playingFields[field].append(card);
       } else {
@@ -511,7 +516,7 @@ $(document).ready(() => {
       const slot = moveHistory[moveHistory.length - 1].lastPlace[i];
 
       const cardLevel = calculateCardLevel(slot.index() + 1);
-      $(element).css('top', cardLevel * 20);
+      $(element).css('top', marginLevel(cardLevel));
 
       if (moveHistory[moveHistory.length - 1].hideLastCard === true) {
         if (i === 0) {
@@ -541,7 +546,7 @@ $(document).ready(() => {
             if (slot.parent().hasClass('pl-slots')) {
               const cardLevel = calculateCardLevel(slot.index() + 1);
               for (let j = 0; j < element.length; j += 1) {
-                element[j].css('top', (cardLevel + j) * 20);
+                element[j].css('top', marginLevel(cardLevel + j));
               }
             } else {
               $(element).css('top', 0);
