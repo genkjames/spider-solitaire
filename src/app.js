@@ -61,16 +61,16 @@ $(document).ready(() => {
   function confettiPieces() {
     const color = `rgb(${randomNumber(256)}, ${randomNumber(256)}, ${randomNumber(256)})`;
     const piece = $('<div class="piece"></div>');
-    const container = $('.wrapper');
+    const container = $(window);
     piece.css({
       'background-color': color,
       width: randomNumber(10) + 'px',
       height: randomNumber(10) + 'px',
       'border-radius': randomNumber(51) + '%',
-      top: randomNumber(container.height()),
-      right: randomNumber(container.width()),
+      top: randomNumber(container.height() - 50),
+      right: randomNumber(container.width() - 50),
     });
-    $('.wrapper').append(piece);
+    $('body').append(piece);
   }
 
   function getConfetti(num) {
@@ -600,13 +600,11 @@ $(document).ready(() => {
       name = ` ${$("[name='name']").val()}`;
     }
     $('#landing').css('animation', 'fade 2s ease-out 0s 1 forwards');
-    $('.body-cover').css('animation', 'fade 2s ease-out 0s 1 forwards');
-    $('.side-body-cover').css('animation', 'fade 2s ease-out 0s 1 forwards');
     setTimeout(() => {
       $('#landing').css('display', 'none');
-      $('.body-cover').css('display', 'none');
+      $('#game').css('display', 'block');
     }, 2000);
-    setTimeout(play, 1500);
+    setTimeout(play, 2500);
   });
 
   $('#reset').on('click', () => {
