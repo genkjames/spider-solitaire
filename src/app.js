@@ -374,7 +374,7 @@ $(document).ready(() => {
     let left = 0;
     const initialTop = $(card).offset().top;
     const maxTop = initialTop + marginLevel(cardLevel);
-    const initialLeft = $(card).offset().left;
+    const initialLeft = $(card).offset().left + $(card).width();
     const maxLeft = $(playingFields[field]).offset().left - initialLeft;
     const animate = setInterval(() => {
       if (top > maxTop && left > maxLeft) {
