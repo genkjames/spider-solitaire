@@ -398,34 +398,37 @@ $(document).ready(() => {
     const playingFields = $('.playing-field .slot');
     let field = 0;
     let show = (numOfCards - playingFields.length) + 1;
-    let n = 1;
+    let n = 0;
     const cardArray = [];
     const placeArray = [];
-    const addCards = setInterval(() => {
-      if (n < numOfCards + 1) {
-        if (show === n) {
-          const frontCard = cards.eq(cards.length - n);
-          frontCard.addClass('show');
-          frontCard.removeClass('cover');
-          frontCard.contents().css('visibility', 'visible');
-          show += 1;
-        }
-        animateDistributionOfCards(cards[cards.length - n], playingFields, field);
-        cardArray.push(cards[cards.length - n]);
-        placeArray.push($('.deck .slot'));
-        field += 1;
-        if (field === playingFields.length) {
-          field = 0;
-        }
-        n += 1;
-      } else {
-        clearInterval(addCards);
-        if (cardArray.length === 7) {
-          addToMoveArray(cardArray, placeArray, false, true);
-        }
-        checkForFullSequence();
+
+    function addCards(card, i) {
+      if (show === n) {
+        const frontCard = cards.eq(cards.length - n);
+        frontCard.addClass('show');
+        frontCard.removeClass('cover');
+        frontCard.contents().css('visibility', 'visible');
+        show += 1;
       }
-    }, 200);
+      animateDistributionOfCards(cards[cards.length - n], playingFields, field);
+      cardArray.push(cards[cards.length - n]);
+      placeArray.push($('.deck .slot'));
+      field += 1;
+      if (field === playingFields.length) {
+        field = 0;
+      }
+      if (cardArray.length === 7) {
+        addToMoveArray(cardArray, placeArray, false, true);
+      }
+      checkForFullSequence();
+    }
+
+    for (let i = numOfCards; i > 0; i -= 1) {
+      setTimeout(() => {
+        n += 1; 
+        addCards(cards[cards.length - n], i
+      )}, 200 * i);
+    }
   }
 
   function distributeInitialCards() {
