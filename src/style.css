@@ -395,12 +395,12 @@ svg {
 .piece {
   position: absolute;
   z-index: 3;
-  animation: 2s drop 4s 1 forwards;
+  animation: 3s disappear 1s 1 forwards;
 }
 
-@keyframes drop {
+@keyframes disappear {
   to {
-    top: 105%;
+    opacity: 0;
   }
 }
 

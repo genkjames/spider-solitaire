@@ -67,8 +67,8 @@ $(document).ready(() => {
       width: randomNumber(10) + 'px',
       height: randomNumber(10) + 'px',
       'border-radius': randomNumber(51) + '%',
-      top: randomNumber(container.height() - 50),
-      right: randomNumber(container.width() - 50),
+      bottom: randomNumber(container.height() -20),
+      right: randomNumber(container.width()),
     });
     $('body').append(piece);
   }
@@ -105,7 +105,6 @@ $(document).ready(() => {
   }
 
   // When Player Wins or Loses
-  let goConfetti = 0;
   function isWinner() {
     clearInterval(startTimer);
     $('#pause').off('click');
@@ -114,10 +113,13 @@ $(document).ready(() => {
     calculateScore(score);
     $('#game-status-container').css('display', 'block');
     $('#status').text(`Congratulations${name}! You got a score of ${score}.`);
+    let pieces = 0;
+    let amount = 2;
     const startConfetti = setInterval(() => {
-      getConfetti(300);
-      goConfetti += 1;
-      if (goConfetti === 5) {
+      getConfetti(amount);
+      pieces += amount;
+      amount += 3;
+      if (pieces > 1500) {
         clearInterval(startConfetti);
       }
     }, 200);
@@ -383,12 +385,18 @@ $(document).ready(() => {
         $(card).css('left', 0);
         playingFields[field].append(card);
       } else {
-        top += (maxTop / (190 / 16));
-        left += (maxLeft / (190 / 16));
+        top += (maxTop / (180 / 20));
+        left += (maxLeft / (180 / 20));
+        if (top > maxTop) {
+          top = maxTop;
+        }
+        if (left > maxLeft) {
+          left = maxLeft;
+        }
         $(card).css('top', top);
         $(card).css('left', left);
       }
-    }, 16);
+    }, 20);
   }
 
   // Card Distribution
@@ -427,7 +435,7 @@ $(document).ready(() => {
       setTimeout(() => {
         n += 1; 
         addCards(cards[cards.length - n], i
-      )}, 200 * i);
+      )}, 300 * i);
     }
   }
 
@@ -594,7 +602,7 @@ $(document).ready(() => {
       undoButton();
       rulesButton();
       startTimer = setInterval(timer, 1000);
-    }, 6000);
+    }, 9500);
   }
 
   $('#submit').on('click', (e) => {
