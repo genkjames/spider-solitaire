@@ -379,6 +379,8 @@ $(document).ready(() => {
     const maxTop = ($(playingFields[field]).offset().top + marginLevel(cardLevel)) - initialTop;
     const initialLeft = $(card).offset().left;
     const maxLeft = $(playingFields[field]).offset().left - initialLeft;
+    const increaseTop = maxTop / (160 / 20);
+    const increaseLeft = maxLeft / (160 / 20);
     const animate = setInterval(() => {
       if (top >= maxTop && left >= maxLeft) {
         clearInterval(animate);
@@ -387,8 +389,8 @@ $(document).ready(() => {
         $(card).css('z-index', 1);
         playingFields[field].append(card);
       } else {
-        top += (maxTop / (150 / 20));
-        left += (maxLeft / (150 / 20));
+        top += increaseTop;
+        left += increaseLeft;
         if (top > maxTop) {
           top = maxTop;
         }
