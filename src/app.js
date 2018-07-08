@@ -374,6 +374,7 @@ $(document).ready(() => {
     const cardLevel = calculateCardLevel(field + 1);
     let top = 0;
     let left = 0;
+    $(card).css('z-index', 2 * cardLevel);
     const initialTop = $(card).offset().top;
     const maxTop = ($(playingFields[field]).offset().top + marginLevel(cardLevel)) - initialTop;
     const initialLeft = $(card).offset().left;
@@ -383,10 +384,11 @@ $(document).ready(() => {
         clearInterval(animate);
         $(card).css('top', marginLevel(cardLevel));
         $(card).css('left', 0);
+        $(card).css('z-index', 1);
         playingFields[field].append(card);
       } else {
-        top += (maxTop / (180 / 20));
-        left += (maxLeft / (180 / 20));
+        top += (maxTop / (150 / 20));
+        left += (maxLeft / (150 / 20));
         if (top > maxTop) {
           top = maxTop;
         }
@@ -425,7 +427,7 @@ $(document).ready(() => {
       if (field === playingFields.length) {
         field = 0;
       }
-      if (cardArray.length === 7) {
+      if (cardArray.length === 7 && numOfCards === 7) {
         addToMoveArray(cardArray, placeArray, false, true);
       }
       checkForFullSequence();
