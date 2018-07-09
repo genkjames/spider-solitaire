@@ -119,7 +119,7 @@ $(document).ready(() => {
       getConfetti(amount);
       pieces += amount;
       amount += 3;
-      if (pieces > 1500) {
+      if (pieces > 1200) {
         clearInterval(startConfetti);
       }
     }, 200);
