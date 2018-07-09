@@ -10,6 +10,7 @@ body {
   background-color: rgba(0, 100, 0, .8);
   background-image: linear-gradient(to right, rgba(0, 100, 0, .8), rgba(0, 128, 0, .8), rgba(0, 100, 0, .8)), url('../images/web.svg');
   background-size: cover;
+  background-attachment: fixed;
 }
 
 /* Container of the landing page and the game view*/
